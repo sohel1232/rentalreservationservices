@@ -1,8 +1,8 @@
 package com.abg.rentalreservationservices.manager;
 
-import com.abg.rentalreservation.entity.User;
-import com.abg.rentalreservation.service.AuthenticationService;
-import com.abg.rentalreservation.service.UserService;
+import com.abg.rentalreservationservices.entity.User;
+import com.abg.rentalreservationservices.service.AuthenticationService;
+import com.abg.rentalreservationservices.service.UserService;
 import org.springframework.stereotype.Service;
 
 @Service

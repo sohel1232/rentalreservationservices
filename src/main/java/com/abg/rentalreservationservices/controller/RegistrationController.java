@@ -1,7 +1,7 @@
 package com.abg.rentalreservationservices.controller;
 
-import com.abg.rentalreservation.entity.User;
-import com.abg.rentalreservation.service.AuthenticationService;
+import com.abg.rentalreservationservices.entity.User;
+import com.abg.rentalreservationservices.service.AuthenticationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
