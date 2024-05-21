@@ -20,9 +20,7 @@ public class RegistrationController {
 
     @GetMapping("/show-registrationform")
     public String showMyLoginPage(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "registration-form";
+        return authenticationService.showRegistrationForm(model);
     }
 
     @PostMapping("/process-registrationform")

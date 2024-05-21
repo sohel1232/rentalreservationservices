@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>home</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    </head>
+    <body>
+        <form th:action="@{/process-reservation}"  th:object="${reservation}" method="POST" >
+            <p>ORIGIN CITY:
+                <select th:field="*{sourceCity}">
+                    <option value="">Select Origin City</option>
+                    <option th:each="city : ${servicableCities}" th:value="${city}" th:text="${city.name}"></option>
+                </select>
+            </p>
+            <p>DESTINATION CITY:
+                <select th:field="*{destinationCity}">
+                    <option value="">Select Origin City</option>
+                    <option th:each="city : ${servicableCities}" th:value="${city}" th:text="${city.name}"></option>
+                </select>
+            </p>
+
+            <p>PICKUP-ADDRESS: <input type="text" th:field="*{pickUpAddress}"></p>
+            <p>DROPOFF-ADDRESS: <input type="text" th:field="*{dropOffAddress}"></p>
+
+            <p>START DATE-TIME: <input type="text" th:field="*{startDateTime}" class="datetime-picker"></p>
+            <p>END DATE-TIME: <input type="text" th:field="*{endDateTime}" class="datetime-picker"></p>
+
+            <input type="submit" value="SEARCH">
+        </form>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                flatpickr('.datetime-picker', {
+                    enableTime: true,
+                    dateFormat: "Y-m-d H:i",
+                    minuteIncrement: 30,
+                    time_24hr: true,
+                    noCalendar: false,
+                    wrap: false,
+                });
+            });
+        </script>
+
+    </body>
+</html>

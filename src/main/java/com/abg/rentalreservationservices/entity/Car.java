@@ -26,4 +26,8 @@ public class Car {
 
     @OneToOne(mappedBy = "car")
     private Reservation reservation;
+
+    @OneToOne
+    @JoinColumn(name = "city_id", referencedColumnName = "id")
+    private ServicableCity city;
 }
