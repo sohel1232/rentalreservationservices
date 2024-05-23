@@ -22,9 +22,11 @@ public class CarRentalManager implements CarRentalService {
     private final KafkaReservationSummaryProducer kafkaReservationSummaryProducer;
 
     @Override
-    public BookingSuccessResponse reserveCar(Long carId, ReservationRequest reservationRequest, Authentication authentication) {
+    public BookingSuccessResponse reserveCar(Long carId, ReservationRequest reservationRequest, Authentication authentication) throws Exception {
+        System.out.println("HI 3");
         Reservation reservation = reservationService.makeNewReservation(carId,reservationRequest,authentication);
         ReservationSummary reservationSummary = reservationService.generateReservationSummary(reservation);
+        System.out.println("HI 4");
         kafkaReservationSummaryProducer.produceReservationSummary(reservationSummary);
         return responseManager.buildSuccessBookingResponse(reservation);
     }

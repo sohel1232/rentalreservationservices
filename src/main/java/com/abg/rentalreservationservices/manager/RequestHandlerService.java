@@ -31,7 +31,8 @@ public class RequestHandlerService {
         return carRentalService.getAvailableCars(reservationRequest);
     }
 
-    public BookingSuccessResponse reserveCar(Long carId, ReservationRequest reservationRequest,Authentication authentication) {
+    public BookingSuccessResponse reserveCar(Long carId, ReservationRequest reservationRequest,Authentication authentication) throws Exception {
+        System.out.println("HI 2");
         return carRentalService.reserveCar(carId,reservationRequest,authentication);
     }
 }

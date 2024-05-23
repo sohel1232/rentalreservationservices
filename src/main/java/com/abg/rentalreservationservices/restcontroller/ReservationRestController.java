@@ -27,7 +27,8 @@ public class ReservationRestController {
     }
 
     @PostMapping("/book/{carId}")
-    public BookingSuccessResponse bookRentalCar(@PathVariable Long carId, Authentication authentication) {
+    public BookingSuccessResponse bookRentalCar(@PathVariable Long carId, Authentication authentication) throws Exception {
+        System.out.println("HI 1");
         ReservationRequest reservationRequest = this.currentReservationRequest;
         return requestHandlerService.reserveCar(carId, reservationRequest,authentication);
     }

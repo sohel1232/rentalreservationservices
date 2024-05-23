@@ -8,7 +8,7 @@ import requestDTO.ReservationRequest;
 import java.util.List;
 
 public interface CarRentalService {
-    BookingSuccessResponse reserveCar(Long carId, ReservationRequest reservationRequest, Authentication authentication);
+    BookingSuccessResponse reserveCar(Long carId, ReservationRequest reservationRequest, Authentication authentication) throws Exception;
 
     List<AvailableCarsResponse> getAvailableCars(ReservationRequest reservationRequest);
 }
