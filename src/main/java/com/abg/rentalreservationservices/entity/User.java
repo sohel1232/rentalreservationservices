@@ -1,13 +1,17 @@
 package com.abg.rentalreservationservices.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -27,4 +31,15 @@ public class User {
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
     private List<Reservation> reservations;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", drivingLicenceNumber='" + drivingLicenceNumber + '\'' +
+                '}';
+    }
 }

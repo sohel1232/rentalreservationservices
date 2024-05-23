@@ -1,34 +1,37 @@
 package com.abg.rentalreservationservices.manager;
 
+import com.abg.rentalreservationservices.entity.Car;
 import com.abg.rentalreservationservices.entity.Reservation;
 import com.abg.rentalreservationservices.entity.ServicableCity;
-import com.abg.rentalreservationservices.service.CarRentalService;
-import com.abg.rentalreservationservices.service.ServicableCityService;
+import com.abg.rentalreservationservices.entity.User;
+import com.abg.rentalreservationservices.repository.ReservationRepository;
+import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
+import com.abg.rentalreservationservices.service.*;
+import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
+import requestDTO.BookingSuccessResponse;
+import requestDTO.ReservationRequest;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class CarRentalManager implements CarRentalService {
 
-    private ServicableCityService servicableCityService;
+    private final ReservationService reservationService;
+    private CarService carService;
+    private final ResponseManager responseManager;
 
-    public CarRentalManager(ServicableCityService servicableCityService) {
-        this.servicableCityService = servicableCityService;
+    @Override
+    public BookingSuccessResponse reserveCar(Long carId, ReservationRequest reservationRequest, Authentication authentication) {
+        Reservation reservation = reservationService.makeNewReservation(carId,reservationRequest,authentication);
+        return responseManager.buildSuccessBookingResponse(reservation);
     }
 
     @Override
-    public String showRentingForm(Model model) {
-        Reservation reservation = new Reservation();
-        List<ServicableCity> allServicableCities = servicableCityService.getAllServicableCities();
-        model.addAttribute("reservation", reservation);
-        model.addAttribute("servicableCities", allServicableCities);
-        return "home";
-    }
-
-    @Override
-    public String processReservation(Reservation reservation) {
-        return "home";
+    public List<AvailableCarsResponse> getAvailableCars(ReservationRequest reservationRequest) {
+        List<Car> availableCars = carService.getAvailableCars(reservationRequest);
+        return responseManager.buildAvailableCarsResponse(availableCars);
     }
 }

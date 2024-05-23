@@ -7,38 +7,91 @@
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     </head>
     <body>
-        <form th:action="@{/process-reservation}"  th:object="${reservation}" method="POST" >
-            <p>ORIGIN CITY:
-                <select th:field="*{sourceCity}">
-                    <option value="">Select Origin City</option>
-                    <option th:each="city : ${servicableCities}" th:value="${city}" th:text="${city.name}"></option>
-                </select>
-            </p>
-            <p>DESTINATION CITY:
-                <select th:field="*{destinationCity}">
-                    <option value="">Select Origin City</option>
-                    <option th:each="city : ${servicableCities}" th:value="${city}" th:text="${city.name}"></option>
-                </select>
-            </p>
+        <div id="reservation-form">
+<!--            <form id="search-form">-->
+<!--                <p>ORIGIN CITY:-->
+<!--                    <select th:field="*{sourceCity}">-->
+<!--                            <option value="">Select Origin City</option>-->
+<!--                            <option th:each="city : ${servicableCities}" th:value="${city.id}" th:text="${city.name}"></option>-->
+<!--                    </select>-->
+<!--                </p>-->
+<!--                <p>DESTINATION CITY:-->
+<!--                    <select th:field="*{destinationCity}">-->
+<!--                        <option value="">Select Destination City</option>-->
+<!--                        <option th:each="city : ${servicableCities}" th:value="${city.id}" th:text="${city.name}"></option>-->
+<!--                    </select>-->
+<!--                </p>-->
 
-            <p>PICKUP-ADDRESS: <input type="text" th:field="*{pickUpAddress}"></p>
-            <p>DROPOFF-ADDRESS: <input type="text" th:field="*{dropOffAddress}"></p>
+<!--                <p>SEATING CAPACITY: <input type="number" th:field="*{seatingCapacity}"></p>-->
 
-            <p>START DATE-TIME: <input type="text" th:field="*{startDateTime}" class="datetime-picker"></p>
-            <p>END DATE-TIME: <input type="text" th:field="*{endDateTime}" class="datetime-picker"></p>
+<!--                <p>PICKUP-ADDRESS: <input type="text" th:field="*{pickUpAddress}"></p>-->
+<!--                <p>DROPOFF-ADDRESS: <input type="text" th:field="*{dropOffAddress}"></p>-->
 
-            <input type="submit" value="SEARCH">
-        </form>
+<!--                <p>START DATE-TIME: <input type="datetime-local" th:field="*{startDateTime}" class="datetime-picker"></p>-->
+<!--                <p>END DATE-TIME: <input type="datetime-local" th:field="*{endDateTime}" class="datetime-picker"></p>-->
+<!--                <input type="submit" value="SEARCH">-->
+<!--            </form>-->
+                <form id="search-form">
+                    <p>ORIGIN CITY:
+                        <select id="sourceCity" name="sourceCity">
+                            <option value="">Select Origin City</option>
+                            <option th:each="city : ${servicableCities}" th:value="${city.id}" th:text="${city.name}"></option>
+                        </select>
+                    </p>
+                    <p>DESTINATION CITY:
+                        <select id="destinationCity" name="destinationCity">
+                            <option value="">Select Destination City</option>
+                            <option th:each="city : ${servicableCities}" th:value="${city.id}" th:text="${city.name}"></option>
+                        </select>
+                    </p>
+                    <p>SEATING CAPACITY: <input type="number" id="seatingCapacity" name="seatingCapacity"></p>
+                    <p>PICKUP-ADDRESS: <input type="text" id="pickUpAddress" name="pickUpAddress"></p>
+                    <p>DROPOFF-ADDRESS: <input type="text" id="dropOffAddress" name="dropOffAddress"></p>
+                    <p>START DATE-TIME: <input type="datetime-local" id="startDateTime" name="startDateTime" class="datetime-picker"></p>
+                    <p>END DATE-TIME: <input type="datetime-local" id="endDateTime" name="endDateTime" class="datetime-picker"></p>
+                    <input type="submit" value="SEARCH">
+                </form>
+        </div>
+
+
+        <div id="cars-catalog">
+        </div>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                flatpickr('.datetime-picker', {
-                    enableTime: true,
-                    dateFormat: "Y-m-d H:i",
-                    minuteIncrement: 30,
-                    time_24hr: true,
-                    noCalendar: false,
-                    wrap: false,
+            document.getElementById('search-form').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                const data = {};
+                formData.forEach((value, key) => {
+                    data[key] = value;
+                });
+                fetch('/api/search-cars', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(cars => {
+                    if (!Array.isArray(cars)) {
+                        throw new Error('Expected an array of cars');
+                    }
+                    const carsCatalog = document.getElementById('cars-catalog');
+                    carsCatalog.innerHTML = '';
+                    cars.forEach(car => {
+                        const carDiv = document.createElement('div');
+                        carDiv.textContent = `Car: ${car.name}, Seats: ${car.seatingCapacity}`;
+                        carsCatalog.appendChild(carDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching cars:', error);
                 });
             });
         </script>

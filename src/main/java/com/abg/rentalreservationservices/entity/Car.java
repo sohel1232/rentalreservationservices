@@ -1,13 +1,18 @@
 package com.abg.rentalreservationservices.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Car {
 
     @Id
@@ -20,7 +25,7 @@ public class Car {
 
     private String type;
 
-    private String seatingCapacity;
+    private Integer seatingCapacity;
 
     private BigDecimal basePrice;
 
@@ -30,4 +35,16 @@ public class Car {
     @OneToOne
     @JoinColumn(name = "city_id", referencedColumnName = "id")
     private ServicableCity city;
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", plate='" + plate + '\'' +
+                ", type='" + type + '\'' +
+                ", seatingCapacity='" + seatingCapacity + '\'' +
+                ", basePrice=" + basePrice +
+                '}';
+    }
 }

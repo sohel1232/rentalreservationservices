@@ -6,4 +6,10 @@ import java.util.List;
 
 public interface ServicableCityService {
     List<ServicableCity> getAllServicableCities();
+
+    ServicableCity getServicableCityByName(String sourceCity);
+
+    ServicableCity getServicableCityById(Long sourceCity);
+
+    ServicableCity findCityByName(String city);
 }

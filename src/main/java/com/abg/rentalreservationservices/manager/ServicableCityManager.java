@@ -20,4 +20,19 @@ public class ServicableCityManager implements ServicableCityService {
     public List<ServicableCity> getAllServicableCities() {
         return servicableCityRepository.findAll();
     }
+
+    @Override
+    public ServicableCity getServicableCityByName(String sourceCity) {
+        return servicableCityRepository.findByName(sourceCity);
+    }
+
+    @Override
+    public ServicableCity getServicableCityById(Long sourceCity) {
+        return servicableCityRepository.findById(sourceCity).orElse(null);
+    }
+
+    @Override
+    public ServicableCity findCityByName(String city) {
+        return servicableCityRepository.findByName(city);
+    }
 }

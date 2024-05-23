@@ -1,7 +1,11 @@
 package com.abg.rentalreservationservices.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -9,15 +13,20 @@ import java.time.LocalDateTime;
 @Entity
 @Table
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String sourceCity;
+    @OneToOne
+    private ServicableCity sourceCity;
 
-    private String destinationCity;
+    @OneToOne
+    private ServicableCity destinationCity;
 
     private String pickUpAddress;
 
@@ -26,6 +35,8 @@ public class Reservation {
     private LocalDateTime startDateTime;
 
     private LocalDateTime endDateTime;
+
+    private Integer seatingCapacity;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

@@ -1,10 +1,15 @@
 package com.abg.rentalreservationservices.service;
 
 import com.abg.rentalreservationservices.entity.Reservation;
-import org.springframework.ui.Model;
+import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
+import org.springframework.security.core.Authentication;
+import requestDTO.BookingSuccessResponse;
+import requestDTO.ReservationRequest;
+
+import java.util.List;
 
 public interface CarRentalService {
-    String showRentingForm(Model model);
+    BookingSuccessResponse reserveCar(Long carId, ReservationRequest reservationRequest, Authentication authentication);
 
-    String processReservation(Reservation reservation);
+    List<AvailableCarsResponse> getAvailableCars(ReservationRequest reservationRequest);
 }
