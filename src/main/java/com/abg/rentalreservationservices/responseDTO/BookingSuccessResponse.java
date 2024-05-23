@@ -1,4 +1,4 @@
-package requestDTO;
+package com.abg.rentalreservationservices.responseDTO;
 
 import com.abg.rentalreservationservices.entity.ServicableCity;
 import jakarta.persistence.OneToOne;

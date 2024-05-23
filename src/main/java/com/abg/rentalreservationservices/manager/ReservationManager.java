@@ -2,6 +2,7 @@ package com.abg.rentalreservationservices.manager;
 
 import com.abg.rentalreservationservices.entity.Car;
 import com.abg.rentalreservationservices.entity.Reservation;
+import com.abg.rentalreservationservices.entity.ReservationSummary;
 import com.abg.rentalreservationservices.entity.User;
 import com.abg.rentalreservationservices.repository.ReservationRepository;
 import com.abg.rentalreservationservices.service.CarService;
@@ -42,5 +43,26 @@ public class ReservationManager implements ReservationService {
                         .endDateTime(reservationRequest.getEndDateTime())
                         .build()
         );
+    }
+
+    @Override
+    public ReservationSummary generateReservationSummary(Reservation reservation) {
+        return ReservationSummary.builder()
+                .carName(reservation.getCar().getName())
+                .carPlate(reservation.getCar().getPlate())
+                .carType(reservation.getCar().getType())
+                .carSeatingCapacity(reservation.getCar().getSeatingCapacity())
+                .reserverName(reservation.getUser().getName())
+                .reserverEmail(reservation.getUser().getEmail())
+                .reserverPhoneNumber(reservation.getUser().getPhoneNumber())
+                .reserverDrivingLicenceNumber(reservation.getUser().getDrivingLicenceNumber())
+                .sourceCity(reservation.getSourceCity().getName())
+                .destinationCity(reservation.getDestinationCity().getName())
+                .pickUpAddress(reservation.getPickUpAddress())
+                .dropOffAddress(reservation.getDropOffAddress())
+                .startDateTime(String.valueOf(reservation.getStartDateTime()))
+                .endDateTime(String.valueOf(reservation.getEndDateTime()))
+                .reservationAmount(reservation.getAmountRecieved())
+                .build();
     }
 }

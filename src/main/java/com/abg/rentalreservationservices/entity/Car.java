@@ -35,16 +35,4 @@ public class Car {
     @OneToOne
     @JoinColumn(name = "city_id", referencedColumnName = "id")
     private ServicableCity city;
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", plate='" + plate + '\'' +
-                ", type='" + type + '\'' +
-                ", seatingCapacity='" + seatingCapacity + '\'' +
-                ", basePrice=" + basePrice +
-                '}';
-    }
 }

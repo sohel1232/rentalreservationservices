@@ -57,7 +57,7 @@ public class SecurityConfiguration {
    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
        httpSecurity.authorizeHttpRequests(configurer ->
                        configurer
-                       .requestMatchers("/register/**").permitAll()
+                       .requestMatchers(WHITELIST).permitAll()
                        .anyRequest().authenticated()
        )
                .formLogin(form ->
@@ -76,5 +76,10 @@ public class SecurityConfiguration {
 
        return httpSecurity.build();
    }
+
+    private static final String[] WHITELIST = {
+            "/register/**",
+            "/auth/**"
+    };
 
 }

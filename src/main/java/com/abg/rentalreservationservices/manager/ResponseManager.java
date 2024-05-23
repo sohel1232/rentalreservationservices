@@ -3,8 +3,10 @@ package com.abg.rentalreservationservices.manager;
 import com.abg.rentalreservationservices.entity.Car;
 import com.abg.rentalreservationservices.entity.Reservation;
 import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
+import com.abg.rentalreservationservices.responseDTO.RegistrationSuccessResponse;
 import org.springframework.stereotype.Service;
-import requestDTO.BookingSuccessResponse;
+import com.abg.rentalreservationservices.responseDTO.BookingSuccessResponse;
+import requestDTO.RegistrationRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,5 +45,12 @@ public class ResponseManager {
             availableCarsResponses.add(availableCarsResponse);
         }
         return availableCarsResponses;
+    }
+
+    public RegistrationSuccessResponse buildSuccessRegistrationResponse(RegistrationRequest registrationRequest) {
+        return RegistrationSuccessResponse.builder()
+                .email(registrationRequest.getEmail())
+                .message("Registration with the email successful.You can now log in using the email.")
+                .build();
     }
 }

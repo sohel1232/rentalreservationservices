@@ -2,10 +2,9 @@ package com.abg.rentalreservationservices.restcontroller;
 
 import com.abg.rentalreservationservices.manager.RequestHandlerService;
 import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
-import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import requestDTO.BookingSuccessResponse;
+import com.abg.rentalreservationservices.responseDTO.BookingSuccessResponse;
 import requestDTO.ReservationRequest;
 
 import java.util.List;
