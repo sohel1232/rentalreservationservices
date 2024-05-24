@@ -5,6 +5,8 @@
  */
 package com.abg.rentalreservationservices.avro;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.util.Utf8;

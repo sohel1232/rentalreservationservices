@@ -32,15 +32,4 @@ public class User {
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
     private List<Reservation> reservations;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", drivingLicenceNumber='" + drivingLicenceNumber + '\'' +
-                '}';
-    }
 }

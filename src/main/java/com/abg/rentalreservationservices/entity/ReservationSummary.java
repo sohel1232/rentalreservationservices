@@ -1,6 +1,7 @@
 package com.abg.rentalreservationservices.entity;
 
 import com.abg.rentalreservationservices.encryption.EncryptionUtil;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,6 +11,8 @@ import java.math.BigDecimal;
 @Builder
 @Data
 public class ReservationSummary {
+    private Long reservationId;
+
     private String reserverName;
     private String reserverEmail;
     private String reserverPhoneNumber;

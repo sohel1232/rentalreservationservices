@@ -1,5 +1,6 @@
 package com.abg.rentalreservationservices.service;
 
+import com.abg.rentalreservationservices.requestDTO.BookingUpdationRequest;
 import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
 import org.springframework.security.core.Authentication;
 import com.abg.rentalreservationservices.responseDTO.BookingSuccessResponse;
@@ -11,4 +12,6 @@ public interface CarRentalService {
     BookingSuccessResponse reserveCar(Long carId, ReservationRequest reservationRequest, Authentication authentication) throws Exception;
 
     List<AvailableCarsResponse> getAvailableCars(ReservationRequest reservationRequest);
+
+    BookingSuccessResponse updateReservation(Long reservationId,BookingUpdationRequest bookingUpdationRequest) throws Exception;
 }

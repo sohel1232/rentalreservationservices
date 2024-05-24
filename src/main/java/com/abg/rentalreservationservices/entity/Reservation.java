@@ -38,6 +38,10 @@ public class Reservation {
 
     private Integer seatingCapacity;
 
+    private String reserverName;
+
+    private String reserverPhoneNumber;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

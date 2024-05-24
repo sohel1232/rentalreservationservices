@@ -1,19 +1,25 @@
 package com.abg.rentalreservationservices.requestDTO;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.checkerframework.checker.units.qual.A;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-public class ReservationRequest {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class BookingUpdationRequest {
+
     private String reserverName;
-    private String reserverPhoneNumber;
-    private String sourceCity;
-    private String destinationCity;
+    private String phoneNumber;
+
     private String pickUpAddress;
     private String dropOffAddress;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private Integer seatingCapacity;
+
 }

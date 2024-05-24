@@ -2,6 +2,7 @@ package com.abg.rentalreservationservices.manager;
 
 import com.abg.rentalreservationservices.entity.*;
 import com.abg.rentalreservationservices.kafka.KafkaReservationSummaryProducer;
+import com.abg.rentalreservationservices.requestDTO.BookingUpdationRequest;
 import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
 import com.abg.rentalreservationservices.service.*;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,6 @@ public class CarRentalManager implements CarRentalService {
 
     @Override
     public BookingSuccessResponse reserveCar(Long carId, ReservationRequest reservationRequest, Authentication authentication) throws Exception {
-        System.out.println("HELLO 5");
         Reservation reservation = reservationService.makeNewReservation(carId,reservationRequest,authentication);
         ReservationSummary reservationSummary = reservationService.generateReservationSummary(reservation);
         kafkaReservationSummaryProducer.produceReservationSummary(reservationSummary);
@@ -34,5 +34,13 @@ public class CarRentalManager implements CarRentalService {
     public List<AvailableCarsResponse> getAvailableCars(ReservationRequest reservationRequest) {
         List<Car> availableCars = carService.getAvailableCars(reservationRequest);
         return responseManager.buildAvailableCarsResponse(availableCars);
+    }
+
+    @Override
+    public BookingSuccessResponse updateReservation(Long reservationId, BookingUpdationRequest bookingUpdationRequest) throws Exception {
+        Reservation updatedReservation = reservationService.updateReservation(reservationId,bookingUpdationRequest);
+        ReservationSummary reservationSummary = reservationService.generateReservationSummary(updatedReservation);
+        kafkaReservationSummaryProducer.produceReservationSummary(reservationSummary);
+        return responseManager.buildSuccessBookingResponse(updatedReservation);
     }
 }

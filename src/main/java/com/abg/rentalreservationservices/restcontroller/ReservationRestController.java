@@ -1,6 +1,7 @@
 package com.abg.rentalreservationservices.restcontroller;
 
 import com.abg.rentalreservationservices.manager.RequestHandlerService;
+import com.abg.rentalreservationservices.requestDTO.BookingUpdationRequest;
 import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -32,4 +33,9 @@ public class ReservationRestController {
         return requestHandlerService.reserveCar(carId, reservationRequest,authentication);
     }
 
+    @PutMapping("/update/{reservationId}")
+    public BookingSuccessResponse updateReservation(@PathVariable Long reservationId,
+                                                            @RequestBody BookingUpdationRequest bookingUpdationRequest) throws Exception {
+        return requestHandlerService.updateReservation(reservationId,bookingUpdationRequest);
+    }
 }

@@ -41,12 +41,9 @@ public class KafkaReservationSummaryProducer {
     }
 
     public void produceReservationSummary(ReservationSummary reservationSummary) throws Exception {
-        System.out.println("HELLO 1");
         reservationSummary.encryptFields(encryptionKey);
         ReservationSummaryAvro reservationSummaryAvro = ReservationSummaryMapper.mapToAvro(reservationSummary);
-        System.out.println("HELLO 3");
         send(reservationSummaryAvro);
-        System.out.println("HELLO 4");
     }
 
 

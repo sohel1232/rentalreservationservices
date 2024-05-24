@@ -3,6 +3,7 @@
   "type": "record",
   "name": "ReservationSummaryAvro",
   "fields": [
+    {"name": "reservationSummaryId", "type": "int"},
     {"name": "reserverName", "type": "string"},
     {"name": "reserverEmail", "type": "string"},
     {"name": "reserverPhoneNumber", "type": "string"},
