@@ -1,5 +1,6 @@
 package com.abg.rentalreservationservices.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,14 @@ public class ServicableCity {
 
     private String name;
 
-    @OneToMany(mappedBy = "city" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "city")
     private List<Car> cars;
 
+    @Override
+    public String toString() {
+        return "ServicableCity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

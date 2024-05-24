@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table
@@ -32,7 +34,19 @@ public class Car {
     @OneToOne(mappedBy = "car")
     private Reservation reservation;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "city_id", referencedColumnName = "id")
     private ServicableCity city;
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", plate='" + plate + '\'' +
+                ", type='" + type + '\'' +
+                ", seatingCapacity=" + seatingCapacity +
+                ", basePrice=" + basePrice +
+                '}';
+    }
 }

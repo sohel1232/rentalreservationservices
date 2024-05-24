@@ -11,7 +11,7 @@ import com.abg.rentalreservationservices.requestDTO.ReservationRequest;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class ReservationRestController {
 
     private final RequestHandlerService requestHandlerService;

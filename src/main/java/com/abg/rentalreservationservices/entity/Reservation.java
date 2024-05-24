@@ -51,4 +51,19 @@ public class Reservation {
     private Car car;
 
     private BigDecimal amountRecieved;
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "id=" + id +
+                ", pickUpAddress='" + pickUpAddress + '\'' +
+                ", dropOffAddress='" + dropOffAddress + '\'' +
+                ", startDateTime=" + startDateTime +
+                ", endDateTime=" + endDateTime +
+                ", seatingCapacity=" + seatingCapacity +
+                ", reserverName='" + reserverName + '\'' +
+                ", reserverPhoneNumber='" + reserverPhoneNumber + '\'' +
+                ", amountRecieved=" + amountRecieved +
+                '}';
+    }
 }
