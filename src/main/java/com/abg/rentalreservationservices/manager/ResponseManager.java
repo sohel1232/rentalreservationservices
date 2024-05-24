@@ -6,7 +6,7 @@ import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
 import com.abg.rentalreservationservices.responseDTO.RegistrationSuccessResponse;
 import org.springframework.stereotype.Service;
 import com.abg.rentalreservationservices.responseDTO.BookingSuccessResponse;
-import requestDTO.RegistrationRequest;
+import com.abg.rentalreservationservices.requestDTO.RegistrationRequest;
 
 import java.util.ArrayList;
 import java.util.List;

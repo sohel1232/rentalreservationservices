@@ -3,14 +3,12 @@ package com.abg.rentalreservationservices.manager;
 import com.abg.rentalreservationservices.entity.Car;
 import com.abg.rentalreservationservices.entity.ServicableCity;
 import com.abg.rentalreservationservices.repository.CarRepository;
-import com.abg.rentalreservationservices.repository.ReservationRepository;
 import com.abg.rentalreservationservices.service.CarService;
 import com.abg.rentalreservationservices.service.ServicableCityService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import requestDTO.ReservationRequest;
+import com.abg.rentalreservationservices.requestDTO.ReservationRequest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

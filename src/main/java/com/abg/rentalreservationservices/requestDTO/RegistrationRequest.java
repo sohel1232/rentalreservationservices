@@ -1,4 +1,4 @@
-package requestDTO;
+package com.abg.rentalreservationservices.requestDTO;
 
 import lombok.Data;
 

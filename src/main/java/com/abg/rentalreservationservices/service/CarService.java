@@ -1,8 +1,7 @@
 package com.abg.rentalreservationservices.service;
 
 import com.abg.rentalreservationservices.entity.Car;
-import com.abg.rentalreservationservices.repository.ReservationRepository;
-import requestDTO.ReservationRequest;
+import com.abg.rentalreservationservices.requestDTO.ReservationRequest;
 
 import java.util.List;
 

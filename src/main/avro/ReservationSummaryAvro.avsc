@@ -1,0 +1,22 @@
+{
+  "namespace": "com.abg.rentalreservationservices.avro",
+  "type": "record",
+  "name": "ReservationSummaryAvro",
+  "fields": [
+    {"name": "reserverName", "type": "string"},
+    {"name": "reserverEmail", "type": "string"},
+    {"name": "reserverPhoneNumber", "type": "string"},
+    {"name": "reserverDrivingLicenceNumber", "type": "string"},
+    {"name": "carName", "type": "string"},
+    {"name": "carPlate", "type": "string"},
+    {"name": "carType", "type": "string"},
+    {"name": "carSeatingCapacity", "type": "int"},
+    {"name": "sourceCity", "type": "string"},
+    {"name": "destinationCity", "type": "string"},
+    {"name": "pickUpAddress", "type": "string"},
+    {"name": "dropOffAddress", "type": "string"},
+    {"name": "startDateTime", "type": "string"},
+    {"name": "endDateTime", "type": "string"},
+    {"name": "reservationAmount", "type": "string"}
+  ]
+}

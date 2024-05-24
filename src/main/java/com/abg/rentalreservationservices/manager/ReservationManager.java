@@ -12,7 +12,7 @@ import com.abg.rentalreservationservices.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import requestDTO.ReservationRequest;
+import com.abg.rentalreservationservices.requestDTO.ReservationRequest;
 
 import java.math.BigDecimal;
 
@@ -29,6 +29,7 @@ public class ReservationManager implements ReservationService {
     public Reservation makeNewReservation(Long carId, ReservationRequest reservationRequest, Authentication authentication) {
         Car car = carService.getCarById(carId);
         User currentLoggedInUser = userService.getCurrentLoggedInUser(authentication);
+        BigDecimal amountRecieved = car.getBasePrice();
 
         return reservationRepository.save(
                 Reservation.builder()
@@ -41,6 +42,7 @@ public class ReservationManager implements ReservationService {
                         .seatingCapacity(reservationRequest.getSeatingCapacity())
                         .startDateTime(reservationRequest.getStartDateTime())
                         .endDateTime(reservationRequest.getEndDateTime())
+                        .amountRecieved(amountRecieved)
                         .build()
         );
     }

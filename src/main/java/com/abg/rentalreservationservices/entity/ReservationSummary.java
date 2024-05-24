@@ -29,15 +29,9 @@ public class ReservationSummary {
     private BigDecimal reservationAmount;
 
     public void encryptFields(SecretKey key) throws Exception {
-        System.out.println("HI 6");
+        this.reserverName = EncryptionUtil.encrypt(this.reserverName, key);
         this.reserverPhoneNumber = EncryptionUtil.encrypt(this.reserverPhoneNumber, key);
         this.reserverDrivingLicenceNumber = EncryptionUtil.encrypt(this.reserverDrivingLicenceNumber, key);
         this.reserverEmail = EncryptionUtil.encrypt(this.reserverEmail,key);
-
-        this.carPlate = EncryptionUtil.encrypt(this.carPlate, key);
-
-        this.pickUpAddress = EncryptionUtil.encrypt(this.pickUpAddress,key);
-        this.dropOffAddress = EncryptionUtil.encrypt(this.dropOffAddress,key);
-        System.out.println("HI 7");
     }
 }

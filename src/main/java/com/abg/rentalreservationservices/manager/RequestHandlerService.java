@@ -10,7 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import com.abg.rentalreservationservices.responseDTO.BookingSuccessResponse;
-import requestDTO.ReservationRequest;
+import com.abg.rentalreservationservices.requestDTO.ReservationRequest;
 
 import java.util.List;
 
@@ -32,7 +32,6 @@ public class RequestHandlerService {
     }
 
     public BookingSuccessResponse reserveCar(Long carId, ReservationRequest reservationRequest,Authentication authentication) throws Exception {
-        System.out.println("HI 2");
         return carRentalService.reserveCar(carId,reservationRequest,authentication);
     }
 }

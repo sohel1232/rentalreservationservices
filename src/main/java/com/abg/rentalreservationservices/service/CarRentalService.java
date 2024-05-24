@@ -3,7 +3,7 @@ package com.abg.rentalreservationservices.service;
 import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
 import org.springframework.security.core.Authentication;
 import com.abg.rentalreservationservices.responseDTO.BookingSuccessResponse;
-import requestDTO.ReservationRequest;
+import com.abg.rentalreservationservices.requestDTO.ReservationRequest;
 
 import java.util.List;
 

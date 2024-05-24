@@ -5,7 +5,7 @@ import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import com.abg.rentalreservationservices.responseDTO.BookingSuccessResponse;
-import requestDTO.ReservationRequest;
+import com.abg.rentalreservationservices.requestDTO.ReservationRequest;
 
 import java.util.List;
 
@@ -28,8 +28,8 @@ public class ReservationRestController {
 
     @PostMapping("/book/{carId}")
     public BookingSuccessResponse bookRentalCar(@PathVariable Long carId, Authentication authentication) throws Exception {
-        System.out.println("HI 1");
         ReservationRequest reservationRequest = this.currentReservationRequest;
         return requestHandlerService.reserveCar(carId, reservationRequest,authentication);
     }
+
 }

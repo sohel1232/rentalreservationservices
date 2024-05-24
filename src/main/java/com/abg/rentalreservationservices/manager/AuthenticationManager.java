@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
-import requestDTO.RegistrationRequest;
+import com.abg.rentalreservationservices.requestDTO.RegistrationRequest;
 
 @Service
 @AllArgsConstructor

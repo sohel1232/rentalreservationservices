@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import com.abg.rentalreservationservices.responseDTO.BookingSuccessResponse;
-import requestDTO.ReservationRequest;
+import com.abg.rentalreservationservices.requestDTO.ReservationRequest;
 
 import java.util.List;
 
@@ -23,10 +23,9 @@ public class CarRentalManager implements CarRentalService {
 
     @Override
     public BookingSuccessResponse reserveCar(Long carId, ReservationRequest reservationRequest, Authentication authentication) throws Exception {
-        System.out.println("HI 3");
+        System.out.println("HELLO 5");
         Reservation reservation = reservationService.makeNewReservation(carId,reservationRequest,authentication);
         ReservationSummary reservationSummary = reservationService.generateReservationSummary(reservation);
-        System.out.println("HI 4");
         kafkaReservationSummaryProducer.produceReservationSummary(reservationSummary);
         return responseManager.buildSuccessBookingResponse(reservation);
     }

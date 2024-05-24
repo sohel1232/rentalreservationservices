@@ -1,0 +1,29 @@
+topic:
+  name: reservation
+
+server:
+  port: 8080
+
+
+spring:
+  kafka:
+    bootstrap-servers: "10.40.94.151:9092"
+    producer:
+      keySerializer: "org.apache.kafka.common.serialization.StringSerializer"
+      valueSerializer: "io.confluent.kafka.serializers.KafkaAvroSerializer"
+      properties:
+        schema:
+          registry:
+            url: "http://10.40.94.151:8081"
+    consumer:
+      group-id: "reservation-group"
+      keyDeserializer: "org.apache.kafka.common.serialization.StringDeserializer"
+      valueDeserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
+      autoOffsetReset: "earliest"
+      properties:
+        schema:
+          registry:
+            url: "http://10.40.94.151:8081"
+        specific:
+          avro:
+            reader: "true"
