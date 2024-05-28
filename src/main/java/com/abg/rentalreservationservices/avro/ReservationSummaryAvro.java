@@ -5,8 +5,6 @@
  */
 package com.abg.rentalreservationservices.avro;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.util.Utf8;
@@ -16,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 2581426110042321922L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ReservationSummaryAvro\",\"namespace\":\"com.abg.rentalreservationservices.avro\",\"fields\":[{\"name\":\"reserverName\",\"type\":\"string\"},{\"name\":\"reserverEmail\",\"type\":\"string\"},{\"name\":\"reserverPhoneNumber\",\"type\":\"string\"},{\"name\":\"reserverDrivingLicenceNumber\",\"type\":\"string\"},{\"name\":\"carName\",\"type\":\"string\"},{\"name\":\"carPlate\",\"type\":\"string\"},{\"name\":\"carType\",\"type\":\"string\"},{\"name\":\"carSeatingCapacity\",\"type\":\"int\"},{\"name\":\"sourceCity\",\"type\":\"string\"},{\"name\":\"destinationCity\",\"type\":\"string\"},{\"name\":\"pickUpAddress\",\"type\":\"string\"},{\"name\":\"dropOffAddress\",\"type\":\"string\"},{\"name\":\"startDateTime\",\"type\":\"string\"},{\"name\":\"endDateTime\",\"type\":\"string\"},{\"name\":\"reservationAmount\",\"type\":\"string\"}]}");
+  private static final long serialVersionUID = 1924471684423371202L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ReservationSummaryAvro\",\"namespace\":\"com.abg.rentalreservationservices.avro\",\"fields\":[{\"name\":\"reservationId\",\"type\":\"long\"},{\"name\":\"reserverName\",\"type\":\"string\"},{\"name\":\"reserverEmail\",\"type\":\"string\"},{\"name\":\"reserverPhoneNumber\",\"type\":\"string\"},{\"name\":\"reserverDrivingLicenceNumber\",\"type\":\"string\"},{\"name\":\"carName\",\"type\":\"string\"},{\"name\":\"carPlate\",\"type\":\"string\"},{\"name\":\"carType\",\"type\":\"string\"},{\"name\":\"carSeatingCapacity\",\"type\":\"int\"},{\"name\":\"sourceCity\",\"type\":\"string\"},{\"name\":\"destinationCity\",\"type\":\"string\"},{\"name\":\"pickUpAddress\",\"type\":\"string\"},{\"name\":\"dropOffAddress\",\"type\":\"string\"},{\"name\":\"startDateTime\",\"type\":\"string\"},{\"name\":\"endDateTime\",\"type\":\"string\"},{\"name\":\"reservationAmount\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -73,6 +71,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
     return DECODER.decode(b);
   }
 
+   private long reservationId;
    private java.lang.CharSequence reserverName;
    private java.lang.CharSequence reserverEmail;
    private java.lang.CharSequence reserverPhoneNumber;
@@ -98,6 +97,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
 
   /**
    * All-args constructor.
+   * @param reservationId The new value for reservationId
    * @param reserverName The new value for reserverName
    * @param reserverEmail The new value for reserverEmail
    * @param reserverPhoneNumber The new value for reserverPhoneNumber
@@ -114,7 +114,8 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
    * @param endDateTime The new value for endDateTime
    * @param reservationAmount The new value for reservationAmount
    */
-  public ReservationSummaryAvro(java.lang.CharSequence reserverName, java.lang.CharSequence reserverEmail, java.lang.CharSequence reserverPhoneNumber, java.lang.CharSequence reserverDrivingLicenceNumber, java.lang.CharSequence carName, java.lang.CharSequence carPlate, java.lang.CharSequence carType, java.lang.Integer carSeatingCapacity, java.lang.CharSequence sourceCity, java.lang.CharSequence destinationCity, java.lang.CharSequence pickUpAddress, java.lang.CharSequence dropOffAddress, java.lang.CharSequence startDateTime, java.lang.CharSequence endDateTime, java.lang.CharSequence reservationAmount) {
+  public ReservationSummaryAvro(java.lang.Long reservationId, java.lang.CharSequence reserverName, java.lang.CharSequence reserverEmail, java.lang.CharSequence reserverPhoneNumber, java.lang.CharSequence reserverDrivingLicenceNumber, java.lang.CharSequence carName, java.lang.CharSequence carPlate, java.lang.CharSequence carType, java.lang.Integer carSeatingCapacity, java.lang.CharSequence sourceCity, java.lang.CharSequence destinationCity, java.lang.CharSequence pickUpAddress, java.lang.CharSequence dropOffAddress, java.lang.CharSequence startDateTime, java.lang.CharSequence endDateTime, java.lang.CharSequence reservationAmount) {
+    this.reservationId = reservationId;
     this.reserverName = reserverName;
     this.reserverEmail = reserverEmail;
     this.reserverPhoneNumber = reserverPhoneNumber;
@@ -137,21 +138,22 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return reserverName;
-    case 1: return reserverEmail;
-    case 2: return reserverPhoneNumber;
-    case 3: return reserverDrivingLicenceNumber;
-    case 4: return carName;
-    case 5: return carPlate;
-    case 6: return carType;
-    case 7: return carSeatingCapacity;
-    case 8: return sourceCity;
-    case 9: return destinationCity;
-    case 10: return pickUpAddress;
-    case 11: return dropOffAddress;
-    case 12: return startDateTime;
-    case 13: return endDateTime;
-    case 14: return reservationAmount;
+    case 0: return reservationId;
+    case 1: return reserverName;
+    case 2: return reserverEmail;
+    case 3: return reserverPhoneNumber;
+    case 4: return reserverDrivingLicenceNumber;
+    case 5: return carName;
+    case 6: return carPlate;
+    case 7: return carType;
+    case 8: return carSeatingCapacity;
+    case 9: return sourceCity;
+    case 10: return destinationCity;
+    case 11: return pickUpAddress;
+    case 12: return dropOffAddress;
+    case 13: return startDateTime;
+    case 14: return endDateTime;
+    case 15: return reservationAmount;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -160,23 +162,41 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: reserverName = (java.lang.CharSequence)value$; break;
-    case 1: reserverEmail = (java.lang.CharSequence)value$; break;
-    case 2: reserverPhoneNumber = (java.lang.CharSequence)value$; break;
-    case 3: reserverDrivingLicenceNumber = (java.lang.CharSequence)value$; break;
-    case 4: carName = (java.lang.CharSequence)value$; break;
-    case 5: carPlate = (java.lang.CharSequence)value$; break;
-    case 6: carType = (java.lang.CharSequence)value$; break;
-    case 7: carSeatingCapacity = (java.lang.Integer)value$; break;
-    case 8: sourceCity = (java.lang.CharSequence)value$; break;
-    case 9: destinationCity = (java.lang.CharSequence)value$; break;
-    case 10: pickUpAddress = (java.lang.CharSequence)value$; break;
-    case 11: dropOffAddress = (java.lang.CharSequence)value$; break;
-    case 12: startDateTime = (java.lang.CharSequence)value$; break;
-    case 13: endDateTime = (java.lang.CharSequence)value$; break;
-    case 14: reservationAmount = (java.lang.CharSequence)value$; break;
+    case 0: reservationId = (java.lang.Long)value$; break;
+    case 1: reserverName = (java.lang.CharSequence)value$; break;
+    case 2: reserverEmail = (java.lang.CharSequence)value$; break;
+    case 3: reserverPhoneNumber = (java.lang.CharSequence)value$; break;
+    case 4: reserverDrivingLicenceNumber = (java.lang.CharSequence)value$; break;
+    case 5: carName = (java.lang.CharSequence)value$; break;
+    case 6: carPlate = (java.lang.CharSequence)value$; break;
+    case 7: carType = (java.lang.CharSequence)value$; break;
+    case 8: carSeatingCapacity = (java.lang.Integer)value$; break;
+    case 9: sourceCity = (java.lang.CharSequence)value$; break;
+    case 10: destinationCity = (java.lang.CharSequence)value$; break;
+    case 11: pickUpAddress = (java.lang.CharSequence)value$; break;
+    case 12: dropOffAddress = (java.lang.CharSequence)value$; break;
+    case 13: startDateTime = (java.lang.CharSequence)value$; break;
+    case 14: endDateTime = (java.lang.CharSequence)value$; break;
+    case 15: reservationAmount = (java.lang.CharSequence)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
+  }
+
+  /**
+   * Gets the value of the 'reservationId' field.
+   * @return The value of the 'reservationId' field.
+   */
+  public long getReservationId() {
+    return reservationId;
+  }
+
+
+  /**
+   * Sets the value of the 'reservationId' field.
+   * @param value the value to set.
+   */
+  public void setReservationId(long value) {
+    this.reservationId = value;
   }
 
   /**
@@ -475,6 +495,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<ReservationSummaryAvro>
     implements org.apache.avro.data.RecordBuilder<ReservationSummaryAvro> {
 
+    private long reservationId;
     private java.lang.CharSequence reserverName;
     private java.lang.CharSequence reserverEmail;
     private java.lang.CharSequence reserverPhoneNumber;
@@ -502,65 +523,69 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
      */
     private Builder(com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.reserverName)) {
-        this.reserverName = data().deepCopy(fields()[0].schema(), other.reserverName);
+      if (isValidValue(fields()[0], other.reservationId)) {
+        this.reservationId = data().deepCopy(fields()[0].schema(), other.reservationId);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.reserverEmail)) {
-        this.reserverEmail = data().deepCopy(fields()[1].schema(), other.reserverEmail);
+      if (isValidValue(fields()[1], other.reserverName)) {
+        this.reserverName = data().deepCopy(fields()[1].schema(), other.reserverName);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.reserverPhoneNumber)) {
-        this.reserverPhoneNumber = data().deepCopy(fields()[2].schema(), other.reserverPhoneNumber);
+      if (isValidValue(fields()[2], other.reserverEmail)) {
+        this.reserverEmail = data().deepCopy(fields()[2].schema(), other.reserverEmail);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.reserverDrivingLicenceNumber)) {
-        this.reserverDrivingLicenceNumber = data().deepCopy(fields()[3].schema(), other.reserverDrivingLicenceNumber);
+      if (isValidValue(fields()[3], other.reserverPhoneNumber)) {
+        this.reserverPhoneNumber = data().deepCopy(fields()[3].schema(), other.reserverPhoneNumber);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.carName)) {
-        this.carName = data().deepCopy(fields()[4].schema(), other.carName);
+      if (isValidValue(fields()[4], other.reserverDrivingLicenceNumber)) {
+        this.reserverDrivingLicenceNumber = data().deepCopy(fields()[4].schema(), other.reserverDrivingLicenceNumber);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
-      if (isValidValue(fields()[5], other.carPlate)) {
-        this.carPlate = data().deepCopy(fields()[5].schema(), other.carPlate);
+      if (isValidValue(fields()[5], other.carName)) {
+        this.carName = data().deepCopy(fields()[5].schema(), other.carName);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
-      if (isValidValue(fields()[6], other.carType)) {
-        this.carType = data().deepCopy(fields()[6].schema(), other.carType);
+      if (isValidValue(fields()[6], other.carPlate)) {
+        this.carPlate = data().deepCopy(fields()[6].schema(), other.carPlate);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
-      if (isValidValue(fields()[7], other.carSeatingCapacity)) {
-        this.carSeatingCapacity = data().deepCopy(fields()[7].schema(), other.carSeatingCapacity);
+      if (isValidValue(fields()[7], other.carType)) {
+        this.carType = data().deepCopy(fields()[7].schema(), other.carType);
         fieldSetFlags()[7] = other.fieldSetFlags()[7];
       }
-      if (isValidValue(fields()[8], other.sourceCity)) {
-        this.sourceCity = data().deepCopy(fields()[8].schema(), other.sourceCity);
+      if (isValidValue(fields()[8], other.carSeatingCapacity)) {
+        this.carSeatingCapacity = data().deepCopy(fields()[8].schema(), other.carSeatingCapacity);
         fieldSetFlags()[8] = other.fieldSetFlags()[8];
       }
-      if (isValidValue(fields()[9], other.destinationCity)) {
-        this.destinationCity = data().deepCopy(fields()[9].schema(), other.destinationCity);
+      if (isValidValue(fields()[9], other.sourceCity)) {
+        this.sourceCity = data().deepCopy(fields()[9].schema(), other.sourceCity);
         fieldSetFlags()[9] = other.fieldSetFlags()[9];
       }
-      if (isValidValue(fields()[10], other.pickUpAddress)) {
-        this.pickUpAddress = data().deepCopy(fields()[10].schema(), other.pickUpAddress);
+      if (isValidValue(fields()[10], other.destinationCity)) {
+        this.destinationCity = data().deepCopy(fields()[10].schema(), other.destinationCity);
         fieldSetFlags()[10] = other.fieldSetFlags()[10];
       }
-      if (isValidValue(fields()[11], other.dropOffAddress)) {
-        this.dropOffAddress = data().deepCopy(fields()[11].schema(), other.dropOffAddress);
+      if (isValidValue(fields()[11], other.pickUpAddress)) {
+        this.pickUpAddress = data().deepCopy(fields()[11].schema(), other.pickUpAddress);
         fieldSetFlags()[11] = other.fieldSetFlags()[11];
       }
-      if (isValidValue(fields()[12], other.startDateTime)) {
-        this.startDateTime = data().deepCopy(fields()[12].schema(), other.startDateTime);
+      if (isValidValue(fields()[12], other.dropOffAddress)) {
+        this.dropOffAddress = data().deepCopy(fields()[12].schema(), other.dropOffAddress);
         fieldSetFlags()[12] = other.fieldSetFlags()[12];
       }
-      if (isValidValue(fields()[13], other.endDateTime)) {
-        this.endDateTime = data().deepCopy(fields()[13].schema(), other.endDateTime);
+      if (isValidValue(fields()[13], other.startDateTime)) {
+        this.startDateTime = data().deepCopy(fields()[13].schema(), other.startDateTime);
         fieldSetFlags()[13] = other.fieldSetFlags()[13];
       }
-      if (isValidValue(fields()[14], other.reservationAmount)) {
-        this.reservationAmount = data().deepCopy(fields()[14].schema(), other.reservationAmount);
+      if (isValidValue(fields()[14], other.endDateTime)) {
+        this.endDateTime = data().deepCopy(fields()[14].schema(), other.endDateTime);
         fieldSetFlags()[14] = other.fieldSetFlags()[14];
+      }
+      if (isValidValue(fields()[15], other.reservationAmount)) {
+        this.reservationAmount = data().deepCopy(fields()[15].schema(), other.reservationAmount);
+        fieldSetFlags()[15] = other.fieldSetFlags()[15];
       }
     }
 
@@ -570,66 +595,109 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
      */
     private Builder(com.abg.rentalreservationservices.avro.ReservationSummaryAvro other) {
       super(SCHEMA$);
-      if (isValidValue(fields()[0], other.reserverName)) {
-        this.reserverName = data().deepCopy(fields()[0].schema(), other.reserverName);
+      if (isValidValue(fields()[0], other.reservationId)) {
+        this.reservationId = data().deepCopy(fields()[0].schema(), other.reservationId);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.reserverEmail)) {
-        this.reserverEmail = data().deepCopy(fields()[1].schema(), other.reserverEmail);
+      if (isValidValue(fields()[1], other.reserverName)) {
+        this.reserverName = data().deepCopy(fields()[1].schema(), other.reserverName);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.reserverPhoneNumber)) {
-        this.reserverPhoneNumber = data().deepCopy(fields()[2].schema(), other.reserverPhoneNumber);
+      if (isValidValue(fields()[2], other.reserverEmail)) {
+        this.reserverEmail = data().deepCopy(fields()[2].schema(), other.reserverEmail);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.reserverDrivingLicenceNumber)) {
-        this.reserverDrivingLicenceNumber = data().deepCopy(fields()[3].schema(), other.reserverDrivingLicenceNumber);
+      if (isValidValue(fields()[3], other.reserverPhoneNumber)) {
+        this.reserverPhoneNumber = data().deepCopy(fields()[3].schema(), other.reserverPhoneNumber);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.carName)) {
-        this.carName = data().deepCopy(fields()[4].schema(), other.carName);
+      if (isValidValue(fields()[4], other.reserverDrivingLicenceNumber)) {
+        this.reserverDrivingLicenceNumber = data().deepCopy(fields()[4].schema(), other.reserverDrivingLicenceNumber);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.carPlate)) {
-        this.carPlate = data().deepCopy(fields()[5].schema(), other.carPlate);
+      if (isValidValue(fields()[5], other.carName)) {
+        this.carName = data().deepCopy(fields()[5].schema(), other.carName);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.carType)) {
-        this.carType = data().deepCopy(fields()[6].schema(), other.carType);
+      if (isValidValue(fields()[6], other.carPlate)) {
+        this.carPlate = data().deepCopy(fields()[6].schema(), other.carPlate);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.carSeatingCapacity)) {
-        this.carSeatingCapacity = data().deepCopy(fields()[7].schema(), other.carSeatingCapacity);
+      if (isValidValue(fields()[7], other.carType)) {
+        this.carType = data().deepCopy(fields()[7].schema(), other.carType);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.sourceCity)) {
-        this.sourceCity = data().deepCopy(fields()[8].schema(), other.sourceCity);
+      if (isValidValue(fields()[8], other.carSeatingCapacity)) {
+        this.carSeatingCapacity = data().deepCopy(fields()[8].schema(), other.carSeatingCapacity);
         fieldSetFlags()[8] = true;
       }
-      if (isValidValue(fields()[9], other.destinationCity)) {
-        this.destinationCity = data().deepCopy(fields()[9].schema(), other.destinationCity);
+      if (isValidValue(fields()[9], other.sourceCity)) {
+        this.sourceCity = data().deepCopy(fields()[9].schema(), other.sourceCity);
         fieldSetFlags()[9] = true;
       }
-      if (isValidValue(fields()[10], other.pickUpAddress)) {
-        this.pickUpAddress = data().deepCopy(fields()[10].schema(), other.pickUpAddress);
+      if (isValidValue(fields()[10], other.destinationCity)) {
+        this.destinationCity = data().deepCopy(fields()[10].schema(), other.destinationCity);
         fieldSetFlags()[10] = true;
       }
-      if (isValidValue(fields()[11], other.dropOffAddress)) {
-        this.dropOffAddress = data().deepCopy(fields()[11].schema(), other.dropOffAddress);
+      if (isValidValue(fields()[11], other.pickUpAddress)) {
+        this.pickUpAddress = data().deepCopy(fields()[11].schema(), other.pickUpAddress);
         fieldSetFlags()[11] = true;
       }
-      if (isValidValue(fields()[12], other.startDateTime)) {
-        this.startDateTime = data().deepCopy(fields()[12].schema(), other.startDateTime);
+      if (isValidValue(fields()[12], other.dropOffAddress)) {
+        this.dropOffAddress = data().deepCopy(fields()[12].schema(), other.dropOffAddress);
         fieldSetFlags()[12] = true;
       }
-      if (isValidValue(fields()[13], other.endDateTime)) {
-        this.endDateTime = data().deepCopy(fields()[13].schema(), other.endDateTime);
+      if (isValidValue(fields()[13], other.startDateTime)) {
+        this.startDateTime = data().deepCopy(fields()[13].schema(), other.startDateTime);
         fieldSetFlags()[13] = true;
       }
-      if (isValidValue(fields()[14], other.reservationAmount)) {
-        this.reservationAmount = data().deepCopy(fields()[14].schema(), other.reservationAmount);
+      if (isValidValue(fields()[14], other.endDateTime)) {
+        this.endDateTime = data().deepCopy(fields()[14].schema(), other.endDateTime);
         fieldSetFlags()[14] = true;
       }
+      if (isValidValue(fields()[15], other.reservationAmount)) {
+        this.reservationAmount = data().deepCopy(fields()[15].schema(), other.reservationAmount);
+        fieldSetFlags()[15] = true;
+      }
+    }
+
+    /**
+      * Gets the value of the 'reservationId' field.
+      * @return The value.
+      */
+    public long getReservationId() {
+      return reservationId;
+    }
+
+
+    /**
+      * Sets the value of the 'reservationId' field.
+      * @param value The value of 'reservationId'.
+      * @return This builder.
+      */
+    public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setReservationId(long value) {
+      validate(fields()[0], value);
+      this.reservationId = value;
+      fieldSetFlags()[0] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'reservationId' field has been set.
+      * @return True if the 'reservationId' field has been set, false otherwise.
+      */
+    public boolean hasReservationId() {
+      return fieldSetFlags()[0];
+    }
+
+
+    /**
+      * Clears the value of the 'reservationId' field.
+      * @return This builder.
+      */
+    public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearReservationId() {
+      fieldSetFlags()[0] = false;
+      return this;
     }
 
     /**
@@ -647,9 +715,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setReserverName(java.lang.CharSequence value) {
-      validate(fields()[0], value);
+      validate(fields()[1], value);
       this.reserverName = value;
-      fieldSetFlags()[0] = true;
+      fieldSetFlags()[1] = true;
       return this;
     }
 
@@ -658,7 +726,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'reserverName' field has been set, false otherwise.
       */
     public boolean hasReserverName() {
-      return fieldSetFlags()[0];
+      return fieldSetFlags()[1];
     }
 
 
@@ -668,7 +736,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearReserverName() {
       reserverName = null;
-      fieldSetFlags()[0] = false;
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -687,9 +755,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setReserverEmail(java.lang.CharSequence value) {
-      validate(fields()[1], value);
+      validate(fields()[2], value);
       this.reserverEmail = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -698,7 +766,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'reserverEmail' field has been set, false otherwise.
       */
     public boolean hasReserverEmail() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
 
 
@@ -708,7 +776,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearReserverEmail() {
       reserverEmail = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -727,9 +795,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setReserverPhoneNumber(java.lang.CharSequence value) {
-      validate(fields()[2], value);
+      validate(fields()[3], value);
       this.reserverPhoneNumber = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -738,7 +806,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'reserverPhoneNumber' field has been set, false otherwise.
       */
     public boolean hasReserverPhoneNumber() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[3];
     }
 
 
@@ -748,7 +816,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearReserverPhoneNumber() {
       reserverPhoneNumber = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -767,9 +835,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setReserverDrivingLicenceNumber(java.lang.CharSequence value) {
-      validate(fields()[3], value);
+      validate(fields()[4], value);
       this.reserverDrivingLicenceNumber = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -778,7 +846,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'reserverDrivingLicenceNumber' field has been set, false otherwise.
       */
     public boolean hasReserverDrivingLicenceNumber() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[4];
     }
 
 
@@ -788,7 +856,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearReserverDrivingLicenceNumber() {
       reserverDrivingLicenceNumber = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -807,9 +875,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setCarName(java.lang.CharSequence value) {
-      validate(fields()[4], value);
+      validate(fields()[5], value);
       this.carName = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[5] = true;
       return this;
     }
 
@@ -818,7 +886,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'carName' field has been set, false otherwise.
       */
     public boolean hasCarName() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[5];
     }
 
 
@@ -828,7 +896,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearCarName() {
       carName = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -847,9 +915,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setCarPlate(java.lang.CharSequence value) {
-      validate(fields()[5], value);
+      validate(fields()[6], value);
       this.carPlate = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[6] = true;
       return this;
     }
 
@@ -858,7 +926,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'carPlate' field has been set, false otherwise.
       */
     public boolean hasCarPlate() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[6];
     }
 
 
@@ -868,7 +936,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearCarPlate() {
       carPlate = null;
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -887,9 +955,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setCarType(java.lang.CharSequence value) {
-      validate(fields()[6], value);
+      validate(fields()[7], value);
       this.carType = value;
-      fieldSetFlags()[6] = true;
+      fieldSetFlags()[7] = true;
       return this;
     }
 
@@ -898,7 +966,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'carType' field has been set, false otherwise.
       */
     public boolean hasCarType() {
-      return fieldSetFlags()[6];
+      return fieldSetFlags()[7];
     }
 
 
@@ -908,7 +976,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearCarType() {
       carType = null;
-      fieldSetFlags()[6] = false;
+      fieldSetFlags()[7] = false;
       return this;
     }
 
@@ -927,9 +995,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setCarSeatingCapacity(int value) {
-      validate(fields()[7], value);
+      validate(fields()[8], value);
       this.carSeatingCapacity = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[8] = true;
       return this;
     }
 
@@ -938,7 +1006,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'carSeatingCapacity' field has been set, false otherwise.
       */
     public boolean hasCarSeatingCapacity() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[8];
     }
 
 
@@ -947,7 +1015,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearCarSeatingCapacity() {
-      fieldSetFlags()[7] = false;
+      fieldSetFlags()[8] = false;
       return this;
     }
 
@@ -966,9 +1034,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setSourceCity(java.lang.CharSequence value) {
-      validate(fields()[8], value);
+      validate(fields()[9], value);
       this.sourceCity = value;
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[9] = true;
       return this;
     }
 
@@ -977,7 +1045,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'sourceCity' field has been set, false otherwise.
       */
     public boolean hasSourceCity() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[9];
     }
 
 
@@ -987,7 +1055,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearSourceCity() {
       sourceCity = null;
-      fieldSetFlags()[8] = false;
+      fieldSetFlags()[9] = false;
       return this;
     }
 
@@ -1006,9 +1074,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setDestinationCity(java.lang.CharSequence value) {
-      validate(fields()[9], value);
+      validate(fields()[10], value);
       this.destinationCity = value;
-      fieldSetFlags()[9] = true;
+      fieldSetFlags()[10] = true;
       return this;
     }
 
@@ -1017,7 +1085,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'destinationCity' field has been set, false otherwise.
       */
     public boolean hasDestinationCity() {
-      return fieldSetFlags()[9];
+      return fieldSetFlags()[10];
     }
 
 
@@ -1027,7 +1095,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearDestinationCity() {
       destinationCity = null;
-      fieldSetFlags()[9] = false;
+      fieldSetFlags()[10] = false;
       return this;
     }
 
@@ -1046,9 +1114,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setPickUpAddress(java.lang.CharSequence value) {
-      validate(fields()[10], value);
+      validate(fields()[11], value);
       this.pickUpAddress = value;
-      fieldSetFlags()[10] = true;
+      fieldSetFlags()[11] = true;
       return this;
     }
 
@@ -1057,7 +1125,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'pickUpAddress' field has been set, false otherwise.
       */
     public boolean hasPickUpAddress() {
-      return fieldSetFlags()[10];
+      return fieldSetFlags()[11];
     }
 
 
@@ -1067,7 +1135,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearPickUpAddress() {
       pickUpAddress = null;
-      fieldSetFlags()[10] = false;
+      fieldSetFlags()[11] = false;
       return this;
     }
 
@@ -1086,9 +1154,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setDropOffAddress(java.lang.CharSequence value) {
-      validate(fields()[11], value);
+      validate(fields()[12], value);
       this.dropOffAddress = value;
-      fieldSetFlags()[11] = true;
+      fieldSetFlags()[12] = true;
       return this;
     }
 
@@ -1097,7 +1165,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'dropOffAddress' field has been set, false otherwise.
       */
     public boolean hasDropOffAddress() {
-      return fieldSetFlags()[11];
+      return fieldSetFlags()[12];
     }
 
 
@@ -1107,7 +1175,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearDropOffAddress() {
       dropOffAddress = null;
-      fieldSetFlags()[11] = false;
+      fieldSetFlags()[12] = false;
       return this;
     }
 
@@ -1126,9 +1194,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setStartDateTime(java.lang.CharSequence value) {
-      validate(fields()[12], value);
+      validate(fields()[13], value);
       this.startDateTime = value;
-      fieldSetFlags()[12] = true;
+      fieldSetFlags()[13] = true;
       return this;
     }
 
@@ -1137,7 +1205,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'startDateTime' field has been set, false otherwise.
       */
     public boolean hasStartDateTime() {
-      return fieldSetFlags()[12];
+      return fieldSetFlags()[13];
     }
 
 
@@ -1147,7 +1215,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearStartDateTime() {
       startDateTime = null;
-      fieldSetFlags()[12] = false;
+      fieldSetFlags()[13] = false;
       return this;
     }
 
@@ -1166,9 +1234,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setEndDateTime(java.lang.CharSequence value) {
-      validate(fields()[13], value);
+      validate(fields()[14], value);
       this.endDateTime = value;
-      fieldSetFlags()[13] = true;
+      fieldSetFlags()[14] = true;
       return this;
     }
 
@@ -1177,7 +1245,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'endDateTime' field has been set, false otherwise.
       */
     public boolean hasEndDateTime() {
-      return fieldSetFlags()[13];
+      return fieldSetFlags()[14];
     }
 
 
@@ -1187,7 +1255,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearEndDateTime() {
       endDateTime = null;
-      fieldSetFlags()[13] = false;
+      fieldSetFlags()[14] = false;
       return this;
     }
 
@@ -1206,9 +1274,9 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return This builder.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setReservationAmount(java.lang.CharSequence value) {
-      validate(fields()[14], value);
+      validate(fields()[15], value);
       this.reservationAmount = value;
-      fieldSetFlags()[14] = true;
+      fieldSetFlags()[15] = true;
       return this;
     }
 
@@ -1217,7 +1285,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       * @return True if the 'reservationAmount' field has been set, false otherwise.
       */
     public boolean hasReservationAmount() {
-      return fieldSetFlags()[14];
+      return fieldSetFlags()[15];
     }
 
 
@@ -1227,7 +1295,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder clearReservationAmount() {
       reservationAmount = null;
-      fieldSetFlags()[14] = false;
+      fieldSetFlags()[15] = false;
       return this;
     }
 
@@ -1236,21 +1304,22 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
     public ReservationSummaryAvro build() {
       try {
         ReservationSummaryAvro record = new ReservationSummaryAvro();
-        record.reserverName = fieldSetFlags()[0] ? this.reserverName : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.reserverEmail = fieldSetFlags()[1] ? this.reserverEmail : (java.lang.CharSequence) defaultValue(fields()[1]);
-        record.reserverPhoneNumber = fieldSetFlags()[2] ? this.reserverPhoneNumber : (java.lang.CharSequence) defaultValue(fields()[2]);
-        record.reserverDrivingLicenceNumber = fieldSetFlags()[3] ? this.reserverDrivingLicenceNumber : (java.lang.CharSequence) defaultValue(fields()[3]);
-        record.carName = fieldSetFlags()[4] ? this.carName : (java.lang.CharSequence) defaultValue(fields()[4]);
-        record.carPlate = fieldSetFlags()[5] ? this.carPlate : (java.lang.CharSequence) defaultValue(fields()[5]);
-        record.carType = fieldSetFlags()[6] ? this.carType : (java.lang.CharSequence) defaultValue(fields()[6]);
-        record.carSeatingCapacity = fieldSetFlags()[7] ? this.carSeatingCapacity : (java.lang.Integer) defaultValue(fields()[7]);
-        record.sourceCity = fieldSetFlags()[8] ? this.sourceCity : (java.lang.CharSequence) defaultValue(fields()[8]);
-        record.destinationCity = fieldSetFlags()[9] ? this.destinationCity : (java.lang.CharSequence) defaultValue(fields()[9]);
-        record.pickUpAddress = fieldSetFlags()[10] ? this.pickUpAddress : (java.lang.CharSequence) defaultValue(fields()[10]);
-        record.dropOffAddress = fieldSetFlags()[11] ? this.dropOffAddress : (java.lang.CharSequence) defaultValue(fields()[11]);
-        record.startDateTime = fieldSetFlags()[12] ? this.startDateTime : (java.lang.CharSequence) defaultValue(fields()[12]);
-        record.endDateTime = fieldSetFlags()[13] ? this.endDateTime : (java.lang.CharSequence) defaultValue(fields()[13]);
-        record.reservationAmount = fieldSetFlags()[14] ? this.reservationAmount : (java.lang.CharSequence) defaultValue(fields()[14]);
+        record.reservationId = fieldSetFlags()[0] ? this.reservationId : (java.lang.Long) defaultValue(fields()[0]);
+        record.reserverName = fieldSetFlags()[1] ? this.reserverName : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.reserverEmail = fieldSetFlags()[2] ? this.reserverEmail : (java.lang.CharSequence) defaultValue(fields()[2]);
+        record.reserverPhoneNumber = fieldSetFlags()[3] ? this.reserverPhoneNumber : (java.lang.CharSequence) defaultValue(fields()[3]);
+        record.reserverDrivingLicenceNumber = fieldSetFlags()[4] ? this.reserverDrivingLicenceNumber : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.carName = fieldSetFlags()[5] ? this.carName : (java.lang.CharSequence) defaultValue(fields()[5]);
+        record.carPlate = fieldSetFlags()[6] ? this.carPlate : (java.lang.CharSequence) defaultValue(fields()[6]);
+        record.carType = fieldSetFlags()[7] ? this.carType : (java.lang.CharSequence) defaultValue(fields()[7]);
+        record.carSeatingCapacity = fieldSetFlags()[8] ? this.carSeatingCapacity : (java.lang.Integer) defaultValue(fields()[8]);
+        record.sourceCity = fieldSetFlags()[9] ? this.sourceCity : (java.lang.CharSequence) defaultValue(fields()[9]);
+        record.destinationCity = fieldSetFlags()[10] ? this.destinationCity : (java.lang.CharSequence) defaultValue(fields()[10]);
+        record.pickUpAddress = fieldSetFlags()[11] ? this.pickUpAddress : (java.lang.CharSequence) defaultValue(fields()[11]);
+        record.dropOffAddress = fieldSetFlags()[12] ? this.dropOffAddress : (java.lang.CharSequence) defaultValue(fields()[12]);
+        record.startDateTime = fieldSetFlags()[13] ? this.startDateTime : (java.lang.CharSequence) defaultValue(fields()[13]);
+        record.endDateTime = fieldSetFlags()[14] ? this.endDateTime : (java.lang.CharSequence) defaultValue(fields()[14]);
+        record.reservationAmount = fieldSetFlags()[15] ? this.reservationAmount : (java.lang.CharSequence) defaultValue(fields()[15]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -1283,6 +1352,8 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
+    out.writeLong(this.reservationId);
+
     out.writeString(this.reserverName);
 
     out.writeString(this.reserverEmail);
@@ -1320,6 +1391,8 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
+      this.reservationId = in.readLong();
+
       this.reserverName = in.readString(this.reserverName instanceof Utf8 ? (Utf8)this.reserverName : null);
 
       this.reserverEmail = in.readString(this.reserverEmail instanceof Utf8 ? (Utf8)this.reserverEmail : null);
@@ -1351,65 +1424,69 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
       this.reservationAmount = in.readString(this.reservationAmount instanceof Utf8 ? (Utf8)this.reservationAmount : null);
 
     } else {
-      for (int i = 0; i < 15; i++) {
+      for (int i = 0; i < 16; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          this.reserverName = in.readString(this.reserverName instanceof Utf8 ? (Utf8)this.reserverName : null);
+          this.reservationId = in.readLong();
           break;
 
         case 1:
-          this.reserverEmail = in.readString(this.reserverEmail instanceof Utf8 ? (Utf8)this.reserverEmail : null);
+          this.reserverName = in.readString(this.reserverName instanceof Utf8 ? (Utf8)this.reserverName : null);
           break;
 
         case 2:
-          this.reserverPhoneNumber = in.readString(this.reserverPhoneNumber instanceof Utf8 ? (Utf8)this.reserverPhoneNumber : null);
+          this.reserverEmail = in.readString(this.reserverEmail instanceof Utf8 ? (Utf8)this.reserverEmail : null);
           break;
 
         case 3:
-          this.reserverDrivingLicenceNumber = in.readString(this.reserverDrivingLicenceNumber instanceof Utf8 ? (Utf8)this.reserverDrivingLicenceNumber : null);
+          this.reserverPhoneNumber = in.readString(this.reserverPhoneNumber instanceof Utf8 ? (Utf8)this.reserverPhoneNumber : null);
           break;
 
         case 4:
-          this.carName = in.readString(this.carName instanceof Utf8 ? (Utf8)this.carName : null);
+          this.reserverDrivingLicenceNumber = in.readString(this.reserverDrivingLicenceNumber instanceof Utf8 ? (Utf8)this.reserverDrivingLicenceNumber : null);
           break;
 
         case 5:
-          this.carPlate = in.readString(this.carPlate instanceof Utf8 ? (Utf8)this.carPlate : null);
+          this.carName = in.readString(this.carName instanceof Utf8 ? (Utf8)this.carName : null);
           break;
 
         case 6:
-          this.carType = in.readString(this.carType instanceof Utf8 ? (Utf8)this.carType : null);
+          this.carPlate = in.readString(this.carPlate instanceof Utf8 ? (Utf8)this.carPlate : null);
           break;
 
         case 7:
-          this.carSeatingCapacity = in.readInt();
+          this.carType = in.readString(this.carType instanceof Utf8 ? (Utf8)this.carType : null);
           break;
 
         case 8:
-          this.sourceCity = in.readString(this.sourceCity instanceof Utf8 ? (Utf8)this.sourceCity : null);
+          this.carSeatingCapacity = in.readInt();
           break;
 
         case 9:
-          this.destinationCity = in.readString(this.destinationCity instanceof Utf8 ? (Utf8)this.destinationCity : null);
+          this.sourceCity = in.readString(this.sourceCity instanceof Utf8 ? (Utf8)this.sourceCity : null);
           break;
 
         case 10:
-          this.pickUpAddress = in.readString(this.pickUpAddress instanceof Utf8 ? (Utf8)this.pickUpAddress : null);
+          this.destinationCity = in.readString(this.destinationCity instanceof Utf8 ? (Utf8)this.destinationCity : null);
           break;
 
         case 11:
-          this.dropOffAddress = in.readString(this.dropOffAddress instanceof Utf8 ? (Utf8)this.dropOffAddress : null);
+          this.pickUpAddress = in.readString(this.pickUpAddress instanceof Utf8 ? (Utf8)this.pickUpAddress : null);
           break;
 
         case 12:
-          this.startDateTime = in.readString(this.startDateTime instanceof Utf8 ? (Utf8)this.startDateTime : null);
+          this.dropOffAddress = in.readString(this.dropOffAddress instanceof Utf8 ? (Utf8)this.dropOffAddress : null);
           break;
 
         case 13:
-          this.endDateTime = in.readString(this.endDateTime instanceof Utf8 ? (Utf8)this.endDateTime : null);
+          this.startDateTime = in.readString(this.startDateTime instanceof Utf8 ? (Utf8)this.startDateTime : null);
           break;
 
         case 14:
+          this.endDateTime = in.readString(this.endDateTime instanceof Utf8 ? (Utf8)this.endDateTime : null);
+          break;
+
+        case 15:
           this.reservationAmount = in.readString(this.reservationAmount instanceof Utf8 ? (Utf8)this.reservationAmount : null);
           break;
 

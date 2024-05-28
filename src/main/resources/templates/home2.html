@@ -7,16 +7,24 @@
     <h1>Car Reservation - Step 1: Find Available Cars</h1>
     <form id="car-reservation-form">
         <label for="reserver-name">Your Name:</label>
-        <input type="text" id="reserver-name" name="reserverName" required>
+        <input type="text" id="reserver-name" name="reserverName" th:text="${reserverName}" required>
         <br>
         <label for="reserver-phone-number">Phone Number:</label>
         <input type="tel" id="reserver-phone-number" name="reserverPhoneNumber" required>
         <br>
-        <label for="source-city">Source City:</label>
-        <input type="text" id="source-city" name="sourceCity" required>
+        <p>Source City:
+            <select id="source-city" name="sourceCity" required>
+                <option value="">Select Origin City</option>
+                <option th:each="city : ${servicableCities}" th:value="${city.name}" th:text="${city.name}"></option>
+            </select>
+        </p>
         <br>
-        <label for="destination-city">Destination City:</label>
-        <input type="text" id="destination-city" name="destinationCity" required>
+        <p>DESTINATION CITY:
+            <select id="destination-city" name="destinationCity" required>
+                <option value="">Select Destination City</option>
+                <option th:each="city : ${servicableCities}" th:value="${city.name}" th:text="${city.name}"></option>
+            </select>
+        </p>
         <br>
         <label for="pickup-location">Pick-up Location:</label>
         <input type="text" id="pickup-location" name="pickupLocation" required>
@@ -49,11 +57,10 @@
 
     <script>
        const form = document.getElementById('car-reservation-form');
-        console.log("hii2 " + form);
        const availableCarsDiv = document.getElementById('available-cars');
 
        form.addEventListener('submit', async (event) => {
-       event.preventDefault(); // Prevent default form submission
+       event.preventDefault();
 
        const formData = new FormData(form);
        const reservationRequest = {

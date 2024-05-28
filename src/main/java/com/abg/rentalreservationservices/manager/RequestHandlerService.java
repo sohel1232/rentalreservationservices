@@ -8,6 +8,7 @@ import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
 import com.abg.rentalreservationservices.service.CarRentalService;
 import com.abg.rentalreservationservices.service.CarService;
 import com.abg.rentalreservationservices.service.ServicableCityService;
+import com.abg.rentalreservationservices.service.UserService;
 import exceptions.BadRequestsException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +28,12 @@ public class RequestHandlerService {
     private final ServicableCityService servicableCityService;
     private final CarRentalService carRentalService;
     private final CarService carService;
+    private final UserService userService;
 
-    public void prepareHomeView(Model model) {
+    public void prepareHomeView(Model model,Authentication authentication) {
         List<ServicableCity> allServicableCities = servicableCityService.getAllServicableCities();
-        model.addAttribute("reservation", new Reservation());
+        String userName = userService.findUserByEmail(authentication.getName()).getName();
+        model.addAttribute("userName", userName);
         model.addAttribute("servicableCities", allServicableCities);
     }
 

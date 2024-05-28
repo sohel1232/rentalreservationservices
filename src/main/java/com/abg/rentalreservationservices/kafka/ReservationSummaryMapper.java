@@ -9,6 +9,7 @@ public class ReservationSummaryMapper {
 
     public static ReservationSummaryAvro mapToAvro(com.abg.rentalreservationservices.entity.ReservationSummary model) {
         return ReservationSummaryAvro.newBuilder()
+                .setReservationId(model.getReservationId())
                 .setReserverName(model.getReserverName())
                 .setReserverEmail(model.getReserverEmail())
                 .setReserverPhoneNumber(model.getReserverPhoneNumber())

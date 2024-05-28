@@ -5,6 +5,7 @@ import com.abg.rentalreservationservices.entity.Reservation;
 import com.abg.rentalreservationservices.manager.RequestHandlerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.SerializationUtils;
@@ -23,8 +24,8 @@ public class ReservationController {
     private final String VIEW_HOMEPAGE = "home";
 
     @GetMapping
-    public String showHomePage(Model model){
-//        requestHandlerService.prepareHomeView(model);
+    public String showHomePage(Model model, Authentication authentication){
+        requestHandlerService.prepareHomeView(model,authentication);
         return "home2";
     }
 

@@ -24,7 +24,6 @@ public class ReservationRestController {
 
     @PostMapping("/cars")
     public ResponseEntity<List<AvailableCarsResponse>> getAvailableCars(@RequestBody ReservationRequest reservationRequest){
-        System.out.println("ENTERED MAPPING");
         this.currentReservationRequest = reservationRequest;
         return requestHandlerService.getAvailableCars(reservationRequest);
     }
