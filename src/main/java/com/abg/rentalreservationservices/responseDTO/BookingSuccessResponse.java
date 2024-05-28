@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class BookingSuccessResponse {
+    private Long reservationId;
     private String carName;
     private String carPlate;
     private Integer seatingCapacity;

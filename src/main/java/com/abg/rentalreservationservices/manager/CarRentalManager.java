@@ -6,6 +6,9 @@ import com.abg.rentalreservationservices.requestDTO.BookingUpdationRequest;
 import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
 import com.abg.rentalreservationservices.service.*;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import com.abg.rentalreservationservices.responseDTO.BookingSuccessResponse;
@@ -23,24 +26,27 @@ public class CarRentalManager implements CarRentalService {
     private final KafkaReservationSummaryProducer kafkaReservationSummaryProducer;
 
     @Override
-    public BookingSuccessResponse reserveCar(Long carId, ReservationRequest reservationRequest, Authentication authentication) throws Exception {
+    public ResponseEntity<BookingSuccessResponse> reserveCar(Long carId, ReservationRequest reservationRequest, Authentication authentication) throws Exception {
         Reservation reservation = reservationService.makeNewReservation(carId,reservationRequest,authentication);
         ReservationSummary reservationSummary = reservationService.generateReservationSummary(reservation);
         kafkaReservationSummaryProducer.produceReservationSummary(reservationSummary);
-        return responseManager.buildSuccessBookingResponse(reservation);
+        BookingSuccessResponse bookingSuccessResponse =  responseManager.buildSuccessBookingResponse(reservation);
+        return new ResponseEntity<>(bookingSuccessResponse, HttpStatus.OK);
     }
 
     @Override
-    public List<AvailableCarsResponse> getAvailableCars(ReservationRequest reservationRequest) {
+    public ResponseEntity<List<AvailableCarsResponse>> getAvailableCars(ReservationRequest reservationRequest) {
         List<Car> availableCars = carService.getAvailableCars(reservationRequest);
-        return responseManager.buildAvailableCarsResponse(availableCars);
+        List<AvailableCarsResponse> availableCarsResponses = responseManager.buildAvailableCarsResponse(availableCars);
+        return new ResponseEntity<>(availableCarsResponses,HttpStatus.OK);
     }
 
     @Override
-    public BookingSuccessResponse updateReservation(Long reservationId, BookingUpdationRequest bookingUpdationRequest) throws Exception {
-        Reservation updatedReservation = reservationService.updateReservation(reservationId,bookingUpdationRequest);
+    public ResponseEntity<BookingSuccessResponse> updateReservation(BookingUpdationRequest bookingUpdationRequest) throws Exception {
+        Reservation updatedReservation = reservationService.updateReservation(bookingUpdationRequest.getReservationId(),bookingUpdationRequest);
         ReservationSummary reservationSummary = reservationService.generateReservationSummary(updatedReservation);
         kafkaReservationSummaryProducer.produceReservationSummary(reservationSummary);
-        return responseManager.buildSuccessBookingResponse(updatedReservation);
+        BookingSuccessResponse bookingSuccessResponse = responseManager.buildSuccessBookingResponse(updatedReservation);
+        return new ResponseEntity<>(bookingSuccessResponse,HttpStatus.OK);
     }
 }

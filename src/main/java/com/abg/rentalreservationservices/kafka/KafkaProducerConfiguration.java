@@ -32,11 +32,9 @@ public class KafkaProducerConfiguration {
         return new NewTopic(topicName, 3, (short) 1);
     }
 
-
-        @Bean
+    @Bean
     public SecretKey secretKey() throws Exception {
         return EncryptionUtil.generateKey();
     }
-
 
 }

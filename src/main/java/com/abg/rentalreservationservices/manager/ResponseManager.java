@@ -15,6 +15,7 @@ import java.util.List;
 public class ResponseManager {
     public BookingSuccessResponse buildSuccessBookingResponse(Reservation reservation) {
         return BookingSuccessResponse.builder()
+                .reservationId(reservation.getId())
                 .carName(reservation.getCar().getName())
                 .carPlate(reservation.getCar().getPlate())
                 .seatingCapacity(reservation.getCar().getSeatingCapacity())

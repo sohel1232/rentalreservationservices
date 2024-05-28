@@ -3,6 +3,7 @@ package com.abg.rentalreservationservices.manager;
 import com.abg.rentalreservationservices.entity.ServicableCity;
 import com.abg.rentalreservationservices.repository.ServicableCityRepository;
 import com.abg.rentalreservationservices.service.ServicableCityService;
+import exceptions.NotFound;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,11 @@ public class ServicableCityManager implements ServicableCityService {
 
     @Override
     public ServicableCity getServicableCityByName(String sourceCity) {
-        return servicableCityRepository.findByName(sourceCity);
+        ServicableCity servicableCity =  servicableCityRepository.findByName(sourceCity);
+        if(servicableCity==null){
+            throw new NotFound("city not found");
+        }
+        return servicableCity;
     }
 
     @Override
@@ -31,8 +36,4 @@ public class ServicableCityManager implements ServicableCityService {
         return servicableCityRepository.findById(sourceCity).orElse(null);
     }
 
-    @Override
-    public ServicableCity findCityByName(String city) {
-        return servicableCityRepository.findByName(city);
-    }
 }

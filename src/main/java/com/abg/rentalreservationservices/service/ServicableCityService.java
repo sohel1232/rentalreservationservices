@@ -11,5 +11,4 @@ public interface ServicableCityService {
 
     ServicableCity getServicableCityById(Long sourceCity);
 
-    ServicableCity findCityByName(String city);
 }

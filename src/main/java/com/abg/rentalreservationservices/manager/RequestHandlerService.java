@@ -1,18 +1,23 @@
 package com.abg.rentalreservationservices.manager;
 
+import com.abg.rentalreservationservices.entity.Car;
 import com.abg.rentalreservationservices.entity.Reservation;
 import com.abg.rentalreservationservices.entity.ServicableCity;
 import com.abg.rentalreservationservices.requestDTO.BookingUpdationRequest;
 import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
 import com.abg.rentalreservationservices.service.CarRentalService;
+import com.abg.rentalreservationservices.service.CarService;
 import com.abg.rentalreservationservices.service.ServicableCityService;
+import exceptions.BadRequestsException;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import com.abg.rentalreservationservices.responseDTO.BookingSuccessResponse;
 import com.abg.rentalreservationservices.requestDTO.ReservationRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,6 +26,7 @@ public class RequestHandlerService {
 
     private final ServicableCityService servicableCityService;
     private final CarRentalService carRentalService;
+    private final CarService carService;
 
     public void prepareHomeView(Model model) {
         List<ServicableCity> allServicableCities = servicableCityService.getAllServicableCities();
@@ -28,15 +34,17 @@ public class RequestHandlerService {
         model.addAttribute("servicableCities", allServicableCities);
     }
 
-    public List<AvailableCarsResponse> getAvailableCars(ReservationRequest reservationRequest) {
+    public ResponseEntity<List<AvailableCarsResponse>> getAvailableCars(ReservationRequest reservationRequest) {
         return carRentalService.getAvailableCars(reservationRequest);
     }
 
-    public BookingSuccessResponse reserveCar(Long carId, ReservationRequest reservationRequest,Authentication authentication) throws Exception {
+    public ResponseEntity<BookingSuccessResponse> reserveCar(Long carId, ReservationRequest reservationRequest, Authentication authentication) throws Exception {
+        System.out.println("hello");
         return carRentalService.reserveCar(carId,reservationRequest,authentication);
     }
 
-    public BookingSuccessResponse updateReservation(Long reservationId, BookingUpdationRequest bookingUpdationRequest) throws Exception {
-        return carRentalService.updateReservation(reservationId,bookingUpdationRequest);
+    public ResponseEntity<BookingSuccessResponse> updateReservation(BookingUpdationRequest bookingUpdationRequest) throws Exception {
+        return carRentalService.updateReservation(bookingUpdationRequest);
     }
+
 }

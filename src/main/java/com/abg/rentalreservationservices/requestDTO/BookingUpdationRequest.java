@@ -14,9 +14,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class BookingUpdationRequest {
 
+    private Long reservationId;
     private String reserverName;
     private String phoneNumber;
-
     private String pickUpAddress;
     private String dropOffAddress;
     private LocalDateTime startDateTime;

@@ -3,6 +3,7 @@ package com.abg.rentalreservationservices.restcontroller;
 import com.abg.rentalreservationservices.manager.RequestHandlerService;
 import com.abg.rentalreservationservices.requestDTO.BookingUpdationRequest;
 import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import com.abg.rentalreservationservices.responseDTO.BookingSuccessResponse;
@@ -11,7 +12,7 @@ import com.abg.rentalreservationservices.requestDTO.ReservationRequest;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api")
 public class ReservationRestController {
 
     private final RequestHandlerService requestHandlerService;
@@ -21,21 +22,23 @@ public class ReservationRestController {
         this.requestHandlerService = requestHandlerService;
     }
 
-    @GetMapping("/cars")
-    public List<AvailableCarsResponse> getAvailableCars(@RequestBody ReservationRequest reservationRequest){
+    @PostMapping("/cars")
+    public ResponseEntity<List<AvailableCarsResponse>> getAvailableCars(@RequestBody ReservationRequest reservationRequest){
+        System.out.println("ENTERED MAPPING");
         this.currentReservationRequest = reservationRequest;
         return requestHandlerService.getAvailableCars(reservationRequest);
     }
 
     @PostMapping("/book/{carId}")
-    public BookingSuccessResponse bookRentalCar(@PathVariable Long carId, Authentication authentication) throws Exception {
+    public ResponseEntity<BookingSuccessResponse> bookRentalCar(@PathVariable Long carId, Authentication authentication) throws Exception {
+        System.out.println("INSIDE MAPPING");
         ReservationRequest reservationRequest = this.currentReservationRequest;
         return requestHandlerService.reserveCar(carId, reservationRequest,authentication);
     }
 
-    @PutMapping("/update/{reservationId}")
-    public BookingSuccessResponse updateReservation(@PathVariable Long reservationId,
-                                                            @RequestBody BookingUpdationRequest bookingUpdationRequest) throws Exception {
-        return requestHandlerService.updateReservation(reservationId,bookingUpdationRequest);
+    @PutMapping("/update-reservation")
+    public ResponseEntity<BookingSuccessResponse> updateReservation(@RequestBody BookingUpdationRequest bookingUpdationRequest) throws Exception {
+        return requestHandlerService.updateReservation(bookingUpdationRequest);
     }
+
 }

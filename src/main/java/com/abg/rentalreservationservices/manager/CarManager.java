@@ -1,10 +1,13 @@
 package com.abg.rentalreservationservices.manager;
 
 import com.abg.rentalreservationservices.entity.Car;
+import com.abg.rentalreservationservices.entity.Reservation;
 import com.abg.rentalreservationservices.entity.ServicableCity;
 import com.abg.rentalreservationservices.repository.CarRepository;
 import com.abg.rentalreservationservices.service.CarService;
 import com.abg.rentalreservationservices.service.ServicableCityService;
+import exceptions.BadRequestsException;
+import exceptions.NotFound;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.abg.rentalreservationservices.requestDTO.ReservationRequest;
@@ -23,32 +26,42 @@ public class CarManager implements CarService {
 
     @Override
     public Car getCarById(Long carId) {
-        return carRepository.findById(carId).orElse(null);
+        return carRepository.findById(carId).orElseThrow(() -> new NotFound("car not found with id: " + carId));
     }
 
     @Override
     public List<Car> getAvailableCars(ReservationRequest reservationRequest) {
-        ServicableCity sourceCity = servicableCityService.findCityByName(reservationRequest.getSourceCity());
-        LocalDate startDate = reservationRequest.getStartDateTime().toLocalDate();
-        LocalDate endDate = reservationRequest.getEndDateTime().toLocalDate();
-
+        ServicableCity sourceCity = servicableCityService.getServicableCityByName(reservationRequest.getSourceCity());
         List<Car> availbleCars = new ArrayList<>();
         List<Car> eligibleSeatingCapacityCarsFromTheCity = carRepository.findAvailableCarsByCityAndCapacity(sourceCity.getName(), reservationRequest.getSeatingCapacity());
 
+        if(eligibleSeatingCapacityCarsFromTheCity.isEmpty()){
+            throw new BadRequestsException("No car available");
+        }
+
         for (Car car : eligibleSeatingCapacityCarsFromTheCity) {
-            if (car.getReservation() == null) {
+            if (car.getReservations()==null && car.getReservations().isEmpty()) {
                 availbleCars.add(car);
             } else {
-                LocalDate alreadyReservationStartDate = car.getReservation().getStartDateTime().toLocalDate();
-                LocalDate alreadyReservationEndDate = car.getReservation().getEndDateTime().toLocalDate();
-
-                boolean noConflict = endDate.isBefore(alreadyReservationStartDate.minusDays(1)) || startDate.isAfter(alreadyReservationEndDate.plusDays(1));
-                if (noConflict) {
-                    System.out.println("Car is availble to for reservation");
+                if(isReservationPossibleForTheDates(car,reservationRequest.getStartDateTime().toLocalDate(),reservationRequest.getEndDateTime().toLocalDate())){
                     availbleCars.add(car);
                 }
             }
         }
         return availbleCars;
+    }
+
+    public Boolean isReservationPossibleForTheDates(Car car,LocalDate requestedStartDate, LocalDate requestedEndDate){
+        List<Reservation> upcomingReservationsForTheCar = car.getReservations();
+        for(Reservation currentReservation : upcomingReservationsForTheCar){
+
+            LocalDate currentReservationStart = currentReservation.getStartDateTime().toLocalDate();
+            LocalDate currentReservationEnd = currentReservation.getEndDateTime().toLocalDate();
+
+            if((requestedStartDate.isBefore(currentReservationEnd.plusDays(1))) && (requestedEndDate.isAfter(currentReservationStart.minusDays(1)))){
+                return false;
+            }
+        }
+        return true;
     }
 }

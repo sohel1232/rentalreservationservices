@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.math.BigDecimal;
@@ -31,8 +32,8 @@ public class Car {
 
     private BigDecimal basePrice;
 
-    @OneToOne(mappedBy = "car")
-    private Reservation reservation;
+    @OneToMany(mappedBy = "car")
+    private  List<Reservation> reservations;
 
     @ManyToOne
     @JoinColumn(name = "city_id", referencedColumnName = "id")

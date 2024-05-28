@@ -24,16 +24,15 @@ public class ReservationController {
 
     @GetMapping
     public String showHomePage(Model model){
-        requestHandlerService.prepareHomeView(model);
-        return VIEW_HOMEPAGE;
+//        requestHandlerService.prepareHomeView(model);
+        return "home2";
     }
 
-    @PostMapping("/search-cars")
-    @ResponseBody
-    public List<Car> showAvailableCars(@RequestBody Reservation reservation) {
-        System.out.println("HIII");
-        return  reservation.getSourceCity().getCars();
-    }
+//    @PostMapping("/search-cars")
+//    @ResponseBody
+//    public List<Car> showAvailableCars(@RequestBody Reservation reservation) {
+//        return  reservation.getSourceCity().getCars();
+//    }
 
 //    @PostMapping("/search-cars")
 //    public String showAvailableCars(Model model,@ModelAttribute Reservation reservation) {

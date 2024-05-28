@@ -4,7 +4,10 @@ import com.abg.rentalreservationservices.entity.User;
 import com.abg.rentalreservationservices.responseDTO.RegistrationSuccessResponse;
 import com.abg.rentalreservationservices.service.AuthenticationService;
 import com.abg.rentalreservationservices.service.UserService;
+import exceptions.BadRequestsException;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -34,14 +37,14 @@ public class AuthenticationManager implements AuthenticationService {
     }
 
     @Override
-    public RegistrationSuccessResponse registerNewUser(@RequestBody RegistrationRequest registrationRequest) {
+    public ResponseEntity<RegistrationSuccessResponse> registerNewUser(@RequestBody RegistrationRequest registrationRequest) {
         User exsistingUser = userService.findUserByEmail(registrationRequest.getEmail());
         if(exsistingUser!=null){
-            System.out.println("User already exsists");//returning exception later on
+            throw new BadRequestsException("User already exists");
         }
 
         if(!registrationRequest.getPassword().equals(registrationRequest.getConfirmPassword())){
-            System.out.println("Password not matching");
+            throw new BadRequestsException("passwords does not matches");
         }
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -57,7 +60,8 @@ public class AuthenticationManager implements AuthenticationService {
                         .build()
         );
 
-        return responseManager.buildSuccessRegistrationResponse(registrationRequest);
+        RegistrationSuccessResponse registrationSuccessResponse=  responseManager.buildSuccessRegistrationResponse(registrationRequest);
+        return new ResponseEntity<>(registrationSuccessResponse, HttpStatus.OK);
     }
 
     @Override

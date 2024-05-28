@@ -22,10 +22,10 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private ServicableCity sourceCity;
 
-    @OneToOne
+    @ManyToOne
     private ServicableCity destinationCity;
 
     private String pickUpAddress;
@@ -46,7 +46,7 @@ public class Reservation {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;
 
