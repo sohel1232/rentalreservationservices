@@ -21,12 +21,12 @@ import java.util.List;
 public class ReservationController {
 
     private final RequestHandlerService requestHandlerService;
-    private final String VIEW_HOMEPAGE = "home";
+    private final String VIEW_HOMEPAGE = "home2";
 
     @GetMapping
     public String showHomePage(Model model, Authentication authentication){
         requestHandlerService.prepareHomeView(model,authentication);
-        return "home2";
+        return VIEW_HOMEPAGE;
     }
 
 //    @PostMapping("/search-cars")

@@ -673,7 +673,7 @@ public class ReservationSummaryAvro extends org.apache.avro.specific.SpecificRec
     /**
       * Sets the value of the 'reservationId' field.
       * @param value The value of 'reservationId'.
-      * @return This builder.
+      * @return This builde.
       */
     public com.abg.rentalreservationservices.avro.ReservationSummaryAvro.Builder setReservationId(long value) {
       validate(fields()[0], value);

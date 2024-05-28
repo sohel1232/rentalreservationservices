@@ -7,10 +7,10 @@
     <h1>Car Reservation - Step 1: Find Available Cars</h1>
     <form id="car-reservation-form">
         <label for="reserver-name">Your Name:</label>
-        <input type="text" id="reserver-name" name="reserverName" th:text="${reserverName}" required>
+        <input type="text" id="reserver-name" name="reserverName" th:value="${userName}" required>
         <br>
         <label for="reserver-phone-number">Phone Number:</label>
-        <input type="tel" id="reserver-phone-number" name="reserverPhoneNumber" required>
+        <input type="tel" id="reserver-phone-number" name="reserverPhoneNumber"  th:value="${phoneNumber}"  required>
         <br>
         <p>Source City:
             <select id="source-city" name="sourceCity" required>
@@ -19,7 +19,7 @@
             </select>
         </p>
         <br>
-        <p>DESTINATION CITY:
+        <p>Destination City:
             <select id="destination-city" name="destinationCity" required>
                 <option value="">Select Destination City</option>
                 <option th:each="city : ${servicableCities}" th:value="${city.name}" th:text="${city.name}"></option>
@@ -53,7 +53,19 @@
         <br>
         <button type="submit">Find Available Cars</button>
     </form>
-    <div id="available-cars"></div>
+<!--    <div id="available-cars"></div>-->
+
+    <div id="available-cars">
+        <h2>Available Cars</h2>
+        <ul>
+            <li th:each="car : ${availableCars}">
+                <b>${car.name}</b> - ${car.plate}
+                <button type="button" class="book-now-btn" data-car-id="${car.id}">Book Now</button>
+            </li>
+        </ul>
+    </div>
+
+
 
     <script>
        const form = document.getElementById('car-reservation-form');
@@ -100,26 +112,6 @@
        console.error('Error fetching available cars:', error);
        }
        });
-
-
-    availableCarsDiv.addEventListener('click', (event) => {
-    const clickedElement = event.target;
-    if (clickedElement.tagName === 'P') {
-        const carId = clickedElement.dataset.carId;
-
-        fetch(`/api/book/${carId}`, {
-            method: 'POST',
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Handle successful booking response (e.g., display confirmation message)
-        })
-        .catch(error => {
-            console.error('Error booking car:', error);
-            // Handle booking error
-        });
-    }
-});
 
 
 

@@ -3,6 +3,7 @@ package com.abg.rentalreservationservices.manager;
 import com.abg.rentalreservationservices.entity.Car;
 import com.abg.rentalreservationservices.entity.Reservation;
 import com.abg.rentalreservationservices.entity.ServicableCity;
+import com.abg.rentalreservationservices.entity.User;
 import com.abg.rentalreservationservices.requestDTO.BookingUpdationRequest;
 import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
 import com.abg.rentalreservationservices.service.CarRentalService;
@@ -32,8 +33,11 @@ public class RequestHandlerService {
 
     public void prepareHomeView(Model model,Authentication authentication) {
         List<ServicableCity> allServicableCities = servicableCityService.getAllServicableCities();
-        String userName = userService.findUserByEmail(authentication.getName()).getName();
+        User currentUser =  userService.findUserByEmail(authentication.getName());
+        String userName = currentUser.getName();
+        String phoneNumber = currentUser.getPhoneNumber();
         model.addAttribute("userName", userName);
+        model.addAttribute("phoneNumber", phoneNumber);
         model.addAttribute("servicableCities", allServicableCities);
     }
 
