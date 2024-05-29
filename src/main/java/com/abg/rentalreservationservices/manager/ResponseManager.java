@@ -4,6 +4,7 @@ import com.abg.rentalreservationservices.entity.Car;
 import com.abg.rentalreservationservices.entity.Reservation;
 import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
 import com.abg.rentalreservationservices.responseDTO.RegistrationSuccessResponse;
+import com.abg.rentalreservationservices.responseDTO.ReservationCancellationSuccessResponse;
 import org.springframework.stereotype.Service;
 import com.abg.rentalreservationservices.responseDTO.BookingSuccessResponse;
 import com.abg.rentalreservationservices.requestDTO.RegistrationRequest;
@@ -52,6 +53,13 @@ public class ResponseManager {
         return RegistrationSuccessResponse.builder()
                 .email(registrationRequest.getEmail())
                 .message("Registration with the email successful.You can now log in using the email.")
+                .build();
+    }
+
+    public ReservationCancellationSuccessResponse buildSuccessReservationCancellationResponse(Reservation reservation) {
+        String message = "Your reservation of " +reservation.getCar().getName() + " " + reservation.getCar().getPlate() + " " + reservation.getCar().getType() + " from " + reservation.getSourceCity().getName() + " to " + reservation.getDestinationCity().getName() +" with reservation Id " + reservation.getId() + " has been cancelled as per your request.";
+        return ReservationCancellationSuccessResponse.builder()
+                .message(message)
                 .build();
     }
 }

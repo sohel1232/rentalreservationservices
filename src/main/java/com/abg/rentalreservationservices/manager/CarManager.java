@@ -58,7 +58,7 @@ public class CarManager implements CarService {
             LocalDate currentReservationStart = currentReservation.getStartDateTime().toLocalDate();
             LocalDate currentReservationEnd = currentReservation.getEndDateTime().toLocalDate();
 
-            if((requestedStartDate.isBefore(currentReservationEnd.plusDays(1))) && (requestedEndDate.isAfter(currentReservationStart.minusDays(1)))){
+            if((requestedStartDate.isBefore(currentReservationEnd.plusDays(2))) && (requestedEndDate.isAfter(currentReservationStart.minusDays(2)))){
                 return false;
             }
         }

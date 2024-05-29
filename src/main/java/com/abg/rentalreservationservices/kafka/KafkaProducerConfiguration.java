@@ -27,9 +27,5 @@ public class KafkaProducerConfiguration {
     @Value("${topic.name}")
     private String topicName;
 
-    @Bean
-    public SecretKey secretKey() throws Exception {
-        return EncryptionUtil.generateKey();
-    }
 
 }

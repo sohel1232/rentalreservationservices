@@ -3,6 +3,7 @@ package com.abg.rentalreservationservices.restcontroller;
 import com.abg.rentalreservationservices.manager.RequestHandlerService;
 import com.abg.rentalreservationservices.requestDTO.BookingUpdationRequest;
 import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
+import com.abg.rentalreservationservices.responseDTO.ReservationCancellationSuccessResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -25,20 +26,23 @@ public class ReservationRestController {
     @PostMapping("/cars")
     public ResponseEntity<List<AvailableCarsResponse>> getAvailableCars(@RequestBody ReservationRequest reservationRequest){
         this.currentReservationRequest = reservationRequest;
-        System.out.println("HELLO HELLO " + reservationRequest);
         return requestHandlerService.getAvailableCars(reservationRequest);
     }
 
     @PostMapping("/book/{carId}")
     public ResponseEntity<BookingSuccessResponse> bookRentalCar(@PathVariable Long carId, Authentication authentication) throws Exception {
         ReservationRequest reservationRequest = this.currentReservationRequest;
-        System.out.println("HII " + reservationRequest);
         return requestHandlerService.reserveCar(carId, reservationRequest,authentication);
     }
 
     @PutMapping("/update-reservation")
     public ResponseEntity<BookingSuccessResponse> updateReservation(@RequestBody BookingUpdationRequest bookingUpdationRequest) throws Exception {
         return requestHandlerService.updateReservation(bookingUpdationRequest);
+    }
+
+    @DeleteMapping("/cancel-reservation/{reservationId}")
+    public ResponseEntity<ReservationCancellationSuccessResponse> cancelReservation(@PathVariable Long reservationId) throws Exception {
+        return requestHandlerService.cancelReservation(reservationId);
     }
 
 }

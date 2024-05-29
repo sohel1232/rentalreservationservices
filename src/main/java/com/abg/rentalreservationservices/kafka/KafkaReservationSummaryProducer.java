@@ -19,13 +19,9 @@ import java.util.concurrent.CompletableFuture;
 public class KafkaReservationSummaryProducer {
     @Value("${topic.name}")
     private String topicName;
-    private final SecretKey encryptionKey;
     @Autowired
     private KafkaTemplate<String, ReservationSummaryAvro> kafkaTemplate;
 
-    public KafkaReservationSummaryProducer(SecretKey encryptionKey) {
-        this.encryptionKey = encryptionKey;
-    }
 
     public void send(ReservationSummaryAvro reservationSummaryAvro){
         CompletableFuture<SendResult<String, ReservationSummaryAvro>> future = kafkaTemplate.send(topicName, UUID.randomUUID().toString(),reservationSummaryAvro);
@@ -41,7 +37,7 @@ public class KafkaReservationSummaryProducer {
     }
 
     public void produceReservationSummary(ReservationSummary reservationSummary) throws Exception {
-        reservationSummary.encryptFields(encryptionKey);
+        reservationSummary.encryptFields();
         ReservationSummaryAvro reservationSummaryAvro = ReservationSummaryMapper.mapToAvro(reservationSummary);
         send(reservationSummaryAvro);
     }

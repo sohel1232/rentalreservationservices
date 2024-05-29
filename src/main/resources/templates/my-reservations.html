@@ -4,33 +4,86 @@
     <meta charset="UTF-8">
     <title>My Reservations</title>
     <style>
-      h1 { font-size: 2em; }
-      .update-btn { margin-right: 10px; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            font-size: 2em;
+            text-align: center;
+            color: #007BFF;
+        }
+        a.button {
+            display: block;
+            width: 200px;
+            padding: 10px 15px;
+            margin: 20px auto;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007BFF;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        a.button:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        li p {
+            margin: 5px 0;
+        }
+        .update-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .update-btn:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
-  <h1>Welcome, <span th:text="${userName}"></span>!</h1>
-  <ul>
+<h1>Welcome, <span th:text="${userName}"></span>!</h1>
+<a href="/" class="button">Go Home</a>
+<ul>
+    <th:block th:if="${#lists.isEmpty(userReservations)}">
+        <li>You currently have no reservations.</li>
+    </th:block>
     <li th:each="reservation : ${userReservations}">
-      <form th:action="@{/car-rental/update-reservation}" method="POST">
-          <input type="hidden" th:value="${reservation.id}" name="reservationId"/>
-          Start Date Time:<strong th:text="${reservation.startDateTime}"></strong>
-            <br>
-          End Date Time:<strong th:text="${reservation.endDateTime}"></strong><br>
-          Reservation ID:
-          <span th:text="${reservation.id}"></span><br>
-          Car Name:
-          <span th:text="${reservation.car.name}"></span><br>
-          Car Plate:
-          <span th:text="${reservation.car.plate}"></span><br>
-          Source City:
-          <span th:text="${reservation.sourceCity.name}"></span><br>
-          Destination City:
-          <span th:text="${reservation.destinationCity.name}"></span><br>
-          <button class="update-btn" type="submit">Update Reservation</button><br>
-          <br>
-      </form>
+        <form th:action="@{/update-reservation}" method="POST">
+            <input type="hidden" th:value="${reservation.id}" name="reservationId"/>
+            <p>Start Date Time: <strong th:text="${reservation.startDateTime}"></strong></p>
+            <p>End Date Time: <strong th:text="${reservation.endDateTime}"></strong></p>
+            <p>Reservation ID: <span th:text="${reservation.id}"></span></p>
+            <p>Car Name: <span th:text="${reservation.car.name}"></span></p>
+            <p>Car Plate: <span th:text="${reservation.car.plate}"></span></p>
+            <p>Source City: <span th:text="${reservation.sourceCity.name}"></span></p>
+            <p>Destination City: <span th:text="${reservation.destinationCity.name}"></span></p>
+            <button class="update-btn" type="submit">Update Reservation</button>
+        </form>
     </li>
-  </ul>
+</ul>
 </body>
 </html>

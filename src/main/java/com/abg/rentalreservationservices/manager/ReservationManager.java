@@ -6,18 +6,23 @@ import com.abg.rentalreservationservices.entity.ReservationSummary;
 import com.abg.rentalreservationservices.entity.User;
 import com.abg.rentalreservationservices.repository.ReservationRepository;
 import com.abg.rentalreservationservices.requestDTO.BookingUpdationRequest;
+import com.abg.rentalreservationservices.responseDTO.ReservationCancellationSuccessResponse;
 import com.abg.rentalreservationservices.service.*;
 import exceptions.AccessDeniedException;
 import exceptions.BadRequestsException;
 import exceptions.NotFound;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import com.abg.rentalreservationservices.requestDTO.ReservationRequest;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -29,6 +34,7 @@ public class ReservationManager implements ReservationService {
     private final UserService userService;
     private final ServicableCityService servicableCityService;
     private final ReservationRepository reservationRepository;
+    private final ResponseManager responseManager;
 
     @Override
     public Reservation makeNewReservation(Long carId, ReservationRequest reservationRequest, Authentication authentication) {
@@ -113,7 +119,26 @@ public class ReservationManager implements ReservationService {
 
     @Override
     public Reservation getReservationById(long reservationId) {
-        return reservationRepository.findById(reservationId).orElseThrow(() -> new NotFound("reservation not found"));
+        return reservationRepository.findById(reservationId).orElseThrow(() -> new NotFound("{\"message\" : \"reservation not found\"}"));
+    }
+
+    @Override
+    public ResponseEntity<ReservationCancellationSuccessResponse> cancelReservation(Long reservationId) {
+        Reservation reservation = getReservationById(reservationId);
+        if(!isCancellationPossible(reservation)){
+            throw new BadRequestsException("{\"message\" : \"Cancellation window has expired\"}");
+        }
+        ReservationCancellationSuccessResponse reservationCancellationSuccessResponse = responseManager.buildSuccessReservationCancellationResponse(reservation);
+        reservationRepository.delete(reservation);
+        log.info("cancelled reservation with reservation id :" + reservationId);
+        return new ResponseEntity<>(reservationCancellationSuccessResponse, HttpStatus.OK);
+    }
+
+    private boolean isCancellationPossible(Reservation reservation) {
+        LocalDate reservationStartDate = reservation.getStartDateTime().toLocalDate();
+        LocalDate today = LocalDate.now();
+        long daysUntilReservation = ChronoUnit.DAYS.between(today, reservationStartDate);
+        return daysUntilReservation > 3;
     }
 
     public Boolean isUpdationPossible(Car car, Reservation reservation, LocalDate updatedStartDate,LocalDate updatedEndDate){

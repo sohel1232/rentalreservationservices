@@ -5,6 +5,7 @@ import com.abg.rentalreservationservices.entity.ServicableCity;
 import com.abg.rentalreservationservices.entity.User;
 import com.abg.rentalreservationservices.requestDTO.BookingUpdationRequest;
 import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
+import com.abg.rentalreservationservices.responseDTO.ReservationCancellationSuccessResponse;
 import com.abg.rentalreservationservices.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -77,5 +78,9 @@ public class RequestHandlerService {
         model.addAttribute("endDate",reservation.getEndDateTime().toLocalDate());
         model.addAttribute("startTime",reservation.getStartDateTime().toLocalTime());
         model.addAttribute("endTime",reservation.getEndDateTime().toLocalTime());
+    }
+
+    public ResponseEntity<ReservationCancellationSuccessResponse> cancelReservation(Long reservationId) {
+        return reservationService.cancelReservation(reservationId);
     }
 }

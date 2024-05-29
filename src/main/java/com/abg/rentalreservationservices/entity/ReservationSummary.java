@@ -31,10 +31,10 @@ public class ReservationSummary {
     private String endDateTime;
     private BigDecimal reservationAmount;
 
-    public void encryptFields(SecretKey key) throws Exception {
-        this.reserverName = EncryptionUtil.encrypt(this.reserverName, key);
-        this.reserverPhoneNumber = EncryptionUtil.encrypt(this.reserverPhoneNumber, key);
-        this.reserverDrivingLicenceNumber = EncryptionUtil.encrypt(this.reserverDrivingLicenceNumber, key);
-        this.reserverEmail = EncryptionUtil.encrypt(this.reserverEmail,key);
+    public void encryptFields() throws Exception {
+        this.reserverName = EncryptionUtil.encrypt(this.reserverName);
+        this.reserverPhoneNumber = EncryptionUtil.encrypt(this.reserverPhoneNumber);
+        this.reserverDrivingLicenceNumber = EncryptionUtil.encrypt(this.reserverDrivingLicenceNumber);
+        this.reserverEmail = EncryptionUtil.encrypt(this.reserverEmail);
     }
 }

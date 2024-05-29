@@ -64,7 +64,7 @@ public class SecurityConfiguration {
                        form
                                .loginPage("/login")
                                .loginProcessingUrl("/authenticateTheUser")
-                               .defaultSuccessUrl("/car-rental",true)
+                               .defaultSuccessUrl("/",true)
                                .permitAll()
                )
                .logout(logout -> logout.permitAll()
