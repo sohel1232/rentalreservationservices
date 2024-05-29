@@ -25,13 +25,14 @@ public class ReservationRestController {
     @PostMapping("/cars")
     public ResponseEntity<List<AvailableCarsResponse>> getAvailableCars(@RequestBody ReservationRequest reservationRequest){
         this.currentReservationRequest = reservationRequest;
+        System.out.println("HELLO HELLO " + reservationRequest);
         return requestHandlerService.getAvailableCars(reservationRequest);
     }
 
     @PostMapping("/book/{carId}")
     public ResponseEntity<BookingSuccessResponse> bookRentalCar(@PathVariable Long carId, Authentication authentication) throws Exception {
-        System.out.println("INSIDE MAPPING");
         ReservationRequest reservationRequest = this.currentReservationRequest;
+        System.out.println("HII " + reservationRequest);
         return requestHandlerService.reserveCar(carId, reservationRequest,authentication);
     }
 

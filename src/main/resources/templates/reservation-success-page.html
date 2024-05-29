@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservation Summary</title>
+</head>
+<body>
+    <h1>Your reservation is successful.</h1>
+    <p><strong>Reservation ID:</strong> <span th:text="${reservation.id}"></span></p>
+    <p><strong>Reserver Name:</strong> <span th:text="${reservation.reserverName}"></span></p>
+    <p><strong>Reserver Phone Number:</strong> <span th:text="${reservation.reserverPhoneNumber}"></span></p>
+    <p><strong>Source City:</strong> <span th:text="${reservation.sourceCity.name}"></span></p>
+    <p><strong>Destination City:</strong> <span th:text="${reservation.destinationCity.name}"></span></p>
+    <p><strong>Pick-Up Address:</strong> <span th:text="${reservation.pickUpAddress}"></span></p>
+    <p><strong>Drop-Off Address:</strong> <span th:text="${reservation.dropOffAddress}"></span></p>
+    <p><strong>Start DateTime:</strong> <span th:text="${reservation.startDateTime}"></span></p>
+    <p><strong>End DateTime:</strong> <span th:text="${reservation.endDateTime}"></span></p>
+    <p><strong>Seating Capacity:</strong> <span th:text="${reservation.seatingCapacity}"></span></p>
+    <p><strong>Amount Received:</strong> <span th:text="${reservation.amountRecieved}"></span></p>
+    </body>
+</html>

@@ -1,38 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>home</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    </head>
-    <body>
-        <div id="reservation-form">
-                <form id="search-form">
-                    <p>ORIGIN CITY:
-                        <select id="sourceCity" name="sourceCity">
-                            <option value="">Select Origin City</option>
-                            <option th:each="city : ${servicableCities}" th:value="${city.id}" th:text="${city.name}"></option>
-                        </select>
-                    </p>
-                    <p>DESTINATION CITY:
-                        <select id="destinationCity" name="destinationCity">
-                            <option value="">Select Destination City</option>
-                            <option th:each="city : ${servicableCities}" th:value="${city.id}" th:text="${city.name}"></option>
-                        </select>
-                    </p>
-                    <p>SEATING CAPACITY: <input type="number" id="seatingCapacity" name="seatingCapacity"></p>
-                    <p>PICKUP-ADDRESS: <input type="text" id="pickUpAddress" name="pickUpAddress"></p>
-                    <p>DROPOFF-ADDRESS: <input type="text" id="dropOffAddress" name="dropOffAddress"></p>
-                    <p>START DATE-TIME: <input type="datetime-local" id="startDateTime" name="startDateTime" class="datetime-picker"></p>
-                    <p>END DATE-TIME: <input type="datetime-local" id="endDateTime" name="endDateTime" class="datetime-picker"></p>
-                    <input type="submit" value="SEARCH">
-                </form>
-        </div>
-
-
-        <div id="cars-catalog">
-        </div>
-
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Car Rental Services</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2em;
+            color: #333;
+        }
+        p {
+            font-size: 1.2em;
+            color: #666;
+        }
+        a.button {
+            display: block;
+            width: 200px;
+            padding: 10px 15px;
+            margin: 10px auto;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007BFF;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        a.button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Welcome, <span th:text="${userName}"></span>!</h1>
+    <p>Choose an option below:</p>
+    <a href="/car-rental/new-reservation" class="button">Make a new Reservation</a>
+    <a href="/car-rental/my-reservations" class="button">See existing Reservations</a>
+</div>
+</body>
 </html>

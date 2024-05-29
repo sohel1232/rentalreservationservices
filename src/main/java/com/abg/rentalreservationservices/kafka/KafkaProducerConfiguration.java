@@ -28,11 +28,6 @@ public class KafkaProducerConfiguration {
     private String topicName;
 
     @Bean
-    public NewTopic createTopic(){
-        return new NewTopic(topicName, 3, (short) 1);
-    }
-
-    @Bean
     public SecretKey secretKey() throws Exception {
         return EncryptionUtil.generateKey();
     }

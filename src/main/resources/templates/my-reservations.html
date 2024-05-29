@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Reservations</title>
+    <style>
+      h1 { font-size: 2em; }
+      .update-btn { margin-right: 10px; }
+    </style>
+</head>
+<body>
+  <h1>Welcome, <span th:text="${userName}"></span>!</h1>
+  <ul>
+    <li th:each="reservation : ${userReservations}">
+      <form th:action="@{/car-rental/update-reservation}" method="POST">
+          <input type="hidden" th:value="${reservation.id}" name="reservationId"/>
+          Start Date Time:<strong th:text="${reservation.startDateTime}"></strong>
+            <br>
+          End Date Time:<strong th:text="${reservation.endDateTime}"></strong><br>
+          Reservation ID:
+          <span th:text="${reservation.id}"></span><br>
+          Car Name:
+          <span th:text="${reservation.car.name}"></span><br>
+          Car Plate:
+          <span th:text="${reservation.car.plate}"></span><br>
+          Source City:
+          <span th:text="${reservation.sourceCity.name}"></span><br>
+          Destination City:
+          <span th:text="${reservation.destinationCity.name}"></span><br>
+          <button class="update-btn" type="submit">Update Reservation</button><br>
+          <br>
+      </form>
+    </li>
+  </ul>
+</body>
+</html>

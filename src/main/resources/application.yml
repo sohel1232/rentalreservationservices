@@ -5,6 +5,18 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: rentalreservationservices
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/rentalservices
+    username: springstudent
+    password: springstudent
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
   kafka:
     bootstrap-servers: "10.40.94.194:9092"
     producer:
@@ -14,15 +26,9 @@ spring:
         schema:
           registry:
             url: "http://10.40.94.194:8081"
-    consumer:
-      group-id: "reservation-group"
-      keyDeserializer: "org.apache.kafka.common.serialization.StringDeserializer"
-      valueDeserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
-      autoOffsetReset: "earliest"
-      properties:
-        schema:
-          registry:
-            url: "http://10.40.94.194:8081"
-        specific:
-          avro:
-            reader: "true"
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

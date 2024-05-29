@@ -1,0 +1,231 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container label,
+        .form-container input,
+        .form-container select,
+        .form-container button {
+            margin-bottom: 10px;
+        }
+        .form-container button {
+            align-self: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h1>Car Reservation - Step 1: Find Available Cars</h1>
+    <form id="car-reservation-form">
+        <label for="reserver-name">Your Name:</label>
+        <input type="text" id="reserver-name" name="reserverName" th:value="${userName}" required>
+        <br>
+        <label for="reserver-phone-number">Phone Number:</label>
+        <input type="tel" id="reserver-phone-number" name="reserverPhoneNumber"  th:value="${phoneNumber}"  required>
+        <br>
+        <p>Source City:
+            <select id="source-city" name="sourceCity" required>
+                <option value="">Select Origin City</option>
+                <option th:each="city : ${servicableCities}" th:value="${city.name}" th:text="${city.name}"></option>
+            </select>
+        </p>
+        <br>
+        <p>Destination City:
+            <select id="destination-city" name="destinationCity" required>
+                <option value="">Select Destination City</option>
+                <option th:each="city : ${servicableCities}" th:value="${city.name}" th:text="${city.name}"></option>
+            </select>
+        </p>
+        <br>
+        <label for="pickup-location">Pick-up Location:</label>
+        <input type="text" id="pickup-location" name="pickUpAddress" required>
+        <br>
+        <label for="dropoff-location">Drop-off Location:</label>
+        <input type="text" id="dropoff-location" name="dropOffAddress">
+        <br>
+        <label for="pickup-date">Pick-up Date:</label>
+        <input type="date" id="pickup-date" name="pickupDate" required>
+        <br>
+        <label for="pickup-time">Pick-up Time:</label>
+        <input type="time" id="pickup-time" name="startDateTime" required>
+        <br>
+        <label for="dropoff-date">Drop-off Date:</label>
+        <input type="date" id="dropoff-date" name="dropoffDate" required>
+        <br>
+        <label for="dropoff-time">Drop-off Time:</label>
+        <input type="time" id="dropoff-time" name="endDateTime" required>
+        <br>
+        <label for="seating-capacity">Seating Capacity:</label>
+        <select id="seating-capacity" name="seatingCapacity" required>
+            <option value="">Select</option>
+            <option value="5">5</option>
+            <option value="7">7</option>
+        </select>
+        <br>
+        <button type="submit">Find Available Cars</button>
+    </form>
+    <div id="available-cars"></div>
+</div>
+
+
+<!--    <h1>Car Reservation - Step 1: Find Available Cars</h1>-->
+<!--    <form id="car-reservation-form">-->
+<!--        <label for="reserver-name">Your Name:</label>-->
+<!--        <input type="text" id="reserver-name" name="reserverName" th:value="${userName}" required>-->
+<!--        <br>-->
+<!--        <label for="reserver-phone-number">Phone Number:</label>-->
+<!--        <input type="tel" id="reserver-phone-number" name="reserverPhoneNumber"  th:value="${phoneNumber}"  required>-->
+<!--        <br>-->
+<!--        <p>Source City:-->
+<!--            <select id="source-city" name="sourceCity" required>-->
+<!--                <option value="">Select Origin City</option>-->
+<!--                <option th:each="city : ${servicableCities}" th:value="${city.name}" th:text="${city.name}"></option>-->
+<!--            </select>-->
+<!--        </p>-->
+<!--        <br>-->
+<!--        <p>Destination City:-->
+<!--            <select id="destination-city" name="destinationCity" required>-->
+<!--                <option value="">Select Destination City</option>-->
+<!--                <option th:each="city : ${servicableCities}" th:value="${city.name}" th:text="${city.name}"></option>-->
+<!--            </select>-->
+<!--        </p>-->
+<!--        <br>-->
+<!--        <label for="pickup-location">Pick-up Location:</label>-->
+<!--        <input type="text" id="pickup-location" name="pickUpAddress" required>-->
+<!--        <br>-->
+<!--        <label for="dropoff-location">Drop-off Location:</label>-->
+<!--        <input type="text" id="dropoff-location" name="dropOffAddress">-->
+<!--        <br>-->
+<!--        <label for="pickup-date">Pick-up Date:</label>-->
+<!--        <input type="date" id="pickup-date" name="pickupDate" required>-->
+<!--        <br>-->
+<!--        <label for="pickup-time">Pick-up Time:</label>-->
+<!--        <input type="time" id="pickup-time" name="startDateTime" required>-->
+<!--        <br>-->
+<!--        <label for="dropoff-date">Drop-off Date:</label>-->
+<!--        <input type="date" id="dropoff-date" name="dropoffDate" required>-->
+<!--        <br>-->
+<!--        <label for="dropoff-time">Drop-off Time:</label>-->
+<!--        <input type="time" id="dropoff-time" name="endDateTime" required>-->
+<!--        <br>-->
+<!--        <label for="seating-capacity">Seating Capacity:</label>-->
+<!--        <select id="seating-capacity" name="seatingCapacity" required>-->
+<!--            <option value="">Select</option>-->
+<!--            <option value="5">5</option>-->
+<!--            <option value="7">7</option>-->
+<!--        </select>-->
+<!--        <br>-->
+<!--        <button type="submit">Find Available Cars</button>-->
+<!--    </form>-->
+<!--    <div id="available-cars"></div>-->
+
+    <script>
+        const form = document.getElementById('car-reservation-form');
+        const availableCarsDiv = document.getElementById('available-cars');
+
+        form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        availableCarsDiv.innerHTML = '';
+
+        const formData = new FormData(form);
+        const reservationRequest = {
+        reserverName: formData.get('reserverName'),
+        reserverPhoneNumber: formData.get('reserverPhoneNumber'),
+        sourceCity: formData.get('sourceCity'),
+        destinationCity: formData.get('destinationCity'),
+        pickUpAddress: formData.get('pickUpAddress'),
+        dropOffAddress: formData.get('dropOffAddress'),
+        startDateTime: new Date(`${formData.get('pickupDate')} ${formData.get('startDateTime')}`),
+        endDateTime: new Date(`${formData.get('dropoffDate')} ${formData.get('endDateTime')}`),
+        seatingCapacity: parseInt(formData.get('seatingCapacity')),
+        };
+
+        try {
+        const response = await fetch('/api/cars', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(reservationRequest)
+        });
+
+        if (!response.ok) {
+          console.error('Error fetching available cars:', response.statusText);
+          return;
+        }
+
+        const availableCars = await response.json();
+
+<!--        availableCars.forEach(car => {-->
+<!--        const carDetails = `-->
+<!--            <p><b>${car.name}</b> - ${car.plate}-->
+<!--            <button class="book-now-btn" onclick="bookCar(${car.id})">Book Now</button></p>`;-->
+<!--        availableCarsDiv.innerHTML += carDetails;-->
+<!--        });-->
+
+        if (availableCars && availableCars.length > 0) {
+            availableCars.forEach(car => {
+                const carDetails = `
+                    <p><b>${car.name}</b> - ${car.plate}
+                    <button class="book-now-btn" onclick="bookCar(${car.id})">Book Now</button></p>`;
+                availableCarsDiv.innerHTML += carDetails;
+            });
+        } else {
+            // If availableCars is null or empty, display a message indicating no cars are available
+            availableCarsDiv.innerHTML = '<p>No cars available.</p>';
+        }
+
+        } catch (error) {
+        console.error('Error fetching available cars:', error);
+        }
+        });
+
+        function bookCar(carId) {
+        const baseUrl = 'http://localhost:8080';
+        const url = `${baseUrl}/api/book/${carId}`;
+        console.log("HI "+ url);
+        const response = fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+       .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+       .then(data => {
+             console.log('Car booked successfully:', data);
+             window.location.href = `/car-rental/reservation-success?reservationId=${data.reservationId}`;
+        })
+       .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+    }
+    </script>
+</body>
+</html>

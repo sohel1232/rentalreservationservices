@@ -94,9 +94,11 @@ public class ReservationManager implements ReservationService {
         LocalDate updatedStartDate = bookingUpdationRequest.getStartDateTime() != null ? bookingUpdationRequest.getStartDateTime().toLocalDate() : null;
         LocalDate updatedEndDate = bookingUpdationRequest.getEndDateTime() != null ? bookingUpdationRequest.getEndDateTime().toLocalDate() : null;
 
-      if(!isUpdationPossible(reservation.getCar(),reservation,updatedStartDate,updatedEndDate)){
-          throw new BadRequestsException("The updation cannot be done.The selected car is already reserved by some other user for the selected duration.Please consider contacting customer care for the possible duration updates");
-      }
+        if(updatedStartDate!=null && updatedEndDate!=null){
+            if(!isUpdationPossible(reservation.getCar(),reservation,updatedStartDate,updatedEndDate)){
+                throw new BadRequestsException("{\"message\" : \"The updation cannot be done.The selected car is already reserved by some other user for the selected duration.Please consider contacting customer care for the possible duration updates\"}");
+            }
+        }
 
       if(bookingUpdationRequest.getStartDateTime()!=null)reservation.setStartDateTime(bookingUpdationRequest.getStartDateTime());
       if(bookingUpdationRequest.getEndDateTime()!=null)reservation.setEndDateTime(bookingUpdationRequest.getEndDateTime());
@@ -108,6 +110,11 @@ public class ReservationManager implements ReservationService {
       reservationRepository.save(reservation);
       return reservation;
 }
+
+    @Override
+    public Reservation getReservationById(long reservationId) {
+        return reservationRepository.findById(reservationId).orElseThrow(() -> new NotFound("reservation not found"));
+    }
 
     public Boolean isUpdationPossible(Car car, Reservation reservation, LocalDate updatedStartDate,LocalDate updatedEndDate){
         List<Reservation> upcomingReservationsForTheCar = car.getReservations();

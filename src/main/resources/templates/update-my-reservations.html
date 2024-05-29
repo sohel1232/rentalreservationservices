@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Your Reservation</title>
+</head>
+<body>
+    <h1>Update Your Reservation</h1>
+    <form id="reservation-updation-form" method="post">
+        <input type="hidden" id="reservationId" name="reservationId" th:value="${reservationId}">
+        <br>
+        <label for="reserverName">Your Name:</label>
+        <input type="text" id="reserverName" name="reserverName" th:value="${reserverName}" required>
+        <br>
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" th:value="${phoneNumber}" required>
+        <br>
+        <label for="pickUpAddress">Pick-up Address:</label>
+        <input type="text" id="pickUpAddress" name="pickUpAddress" th:value="${pickUpAddress}" required>
+        <br>
+        <label for="dropOffAddress">Drop-off Address:</label>
+        <input type="text" id="dropOffAddress" name="dropOffAddress" th:value="${dropOffAddress}" required>
+        <br>
+
+        <label for="pickup-date">Pick-up Date:</label>
+        <input type="date" id="pickup-date" name="pickupDate" th:value="${startDate}" required>
+        <br>
+        <label for="pickup-time">Pick-up Time:</label>
+        <input type="time" id="pickup-time" name="startDateTime" th:value="${startTime}" required>
+        <br>
+        <label for="dropoff-date">Drop-off Date:</label>
+        <input type="date" id="dropoff-date" name="dropoffDate" th:value="${endDate}" required>
+        <br>
+        <label for="dropoff-time">Drop-off Time:</label>
+        <input type="time" id="dropoff-time" name="endDateTime" th:value="${endTime}" required>
+        <br>
+        <button type="submit">Update Reservation</button>
+    </form>
+
+    <div id="error"></div>
+
+    <script>
+        const form = document.getElementById('reservation-updation-form');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const bookingUpdationRequest = {
+                reservationId: formData.get('reservationId'),
+                reserverName: formData.get('reserverName'),
+                phoneNumber: formData.get('phoneNumber'),
+                pickUpAddress: formData.get('pickUpAddress'),
+                dropOffAddress: formData.get('dropOffAddress'),
+                startDateTime: new Date(`${formData.get('pickupDate')} ${formData.get('startDateTime')}`),
+                endDateTime: new Date(`${formData.get('dropoffDate')} ${formData.get('endDateTime')}`),
+            };
+
+            try {
+                const baseUrl = 'http://localhost:8080';
+                const url = `${baseUrl}/api/update-reservation`;
+                console.log("Updating reservation at: ", url);
+
+                const response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bookingUpdationRequest)
+                });
+                if (!response.ok) {
+                    console.log("Hii1");
+                    const errorMessage = await response.json();
+                    document.getElementById('error').innerText = errorMessage.message;
+                    console.log("Hii55 " + errorMessage.message + " " + errorMessage.message) ;
+<!--                    document.getElementById('error').innerText = response.text;-->
+                    console.log("Hii2");
+                    return;
+                } else {
+                    console.log("Hii3");
+                    const data = await response.json();
+                    console.log('Reservation updated successfully:', data);
+                    window.location.href = `/car-rental/reservation-success?reservationId=${data.reservationId}`;
+                }
+            } catch (error) {
+                      console.log("Hii4");
+                console.error('There has been some error with updation');
+                      console.log("Hii1");
+            }
+        });
+    </script>
+
+
+</body>
+</html>

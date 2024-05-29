@@ -1,19 +1,11 @@
 package com.abg.rentalreservationservices.controller;
 
-import com.abg.rentalreservationservices.entity.Car;
-import com.abg.rentalreservationservices.entity.Reservation;
 import com.abg.rentalreservationservices.manager.RequestHandlerService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.SerializationUtils;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
-import java.util.Base64;
-import java.util.List;
 
 @Controller
 @RequestMapping("/car-rental")
@@ -21,24 +13,40 @@ import java.util.List;
 public class ReservationController {
 
     private final RequestHandlerService requestHandlerService;
-    private final String VIEW_HOMEPAGE = "home2";
+    private final String VIEW_HOMEPAGE = "home";
+    private final String NEWRESERVATION = "new-reservation-form";
+    private final String RESERVATION_SUCCESS = "reservation-success-page";
+    private final String VIEW_MYRESERVATIONS = "my-reservations";
+    private final String VIEW_RESERVATION_UPDATION = "update-my-reservations";
 
     @GetMapping
-    public String showHomePage(Model model, Authentication authentication){
-        requestHandlerService.prepareHomeView(model,authentication);
+    public String showHomePage(Authentication authentication,Model model){
+        requestHandlerService.prepareHomeView(authentication,model);
         return VIEW_HOMEPAGE;
     }
 
-//    @PostMapping("/search-cars")
-//    @ResponseBody
-//    public List<Car> showAvailableCars(@RequestBody Reservation reservation) {
-//        return  reservation.getSourceCity().getCars();
-//    }
+    @GetMapping("/new-reservation")
+    public String showNewReservationForm(Model model, Authentication authentication){
+        requestHandlerService.prepareNewReservationFormView(model,authentication);
+        return NEWRESERVATION;
+    }
 
-//    @PostMapping("/search-cars")
-//    public String showAvailableCars(Model model,@ModelAttribute Reservation reservation) {
-//        requestHandlerService.processAvailableCarsRequest(model,reservation);
-//        return VIEW_HOMEPAGE;
-//    }
 
+    @GetMapping("/reservation-success")
+    public String showReservationSummary(Model model, @RequestParam(name = "reservationId") String reservationId) {
+        requestHandlerService.prepareReservationSummaryView(model,reservationId);
+        return RESERVATION_SUCCESS;
+    }
+
+    @GetMapping("/my-reservations")
+    public String showUserReservations(Model model,Authentication authentication) {
+        requestHandlerService.prepareMyReservationsView(model,authentication);
+        return VIEW_MYRESERVATIONS;
+    }
+
+    @PostMapping("/update-reservation")
+    public String updateReservationForm(@RequestParam String reservationId,Model model) {
+        requestHandlerService.prepareReservationsUpdationView(reservationId,model);
+        return VIEW_RESERVATION_UPDATION;
+    }
 }

@@ -12,4 +12,6 @@ public interface ReservationService {
     ReservationSummary generateReservationSummary(Reservation reservation);
 
     Reservation updateReservation(Long reservationId, BookingUpdationRequest bookingUpdationRequest);
+
+    Reservation getReservationById(long reservationId);
 }

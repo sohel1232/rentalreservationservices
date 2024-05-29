@@ -1,16 +1,11 @@
 package com.abg.rentalreservationservices.manager;
 
-import com.abg.rentalreservationservices.entity.Car;
 import com.abg.rentalreservationservices.entity.Reservation;
 import com.abg.rentalreservationservices.entity.ServicableCity;
 import com.abg.rentalreservationservices.entity.User;
 import com.abg.rentalreservationservices.requestDTO.BookingUpdationRequest;
 import com.abg.rentalreservationservices.responseDTO.AvailableCarsResponse;
-import com.abg.rentalreservationservices.service.CarRentalService;
-import com.abg.rentalreservationservices.service.CarService;
-import com.abg.rentalreservationservices.service.ServicableCityService;
-import com.abg.rentalreservationservices.service.UserService;
-import exceptions.BadRequestsException;
+import com.abg.rentalreservationservices.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -19,7 +14,6 @@ import org.springframework.ui.Model;
 import com.abg.rentalreservationservices.responseDTO.BookingSuccessResponse;
 import com.abg.rentalreservationservices.requestDTO.ReservationRequest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,8 +24,9 @@ public class RequestHandlerService {
     private final CarRentalService carRentalService;
     private final CarService carService;
     private final UserService userService;
+    private final ReservationService reservationService;
 
-    public void prepareHomeView(Model model,Authentication authentication) {
+    public void prepareNewReservationFormView(Model model, Authentication authentication) {
         List<ServicableCity> allServicableCities = servicableCityService.getAllServicableCities();
         User currentUser =  userService.findUserByEmail(authentication.getName());
         String userName = currentUser.getName();
@@ -46,7 +41,6 @@ public class RequestHandlerService {
     }
 
     public ResponseEntity<BookingSuccessResponse> reserveCar(Long carId, ReservationRequest reservationRequest, Authentication authentication) throws Exception {
-        System.out.println("hello");
         return carRentalService.reserveCar(carId,reservationRequest,authentication);
     }
 
@@ -54,4 +48,34 @@ public class RequestHandlerService {
         return carRentalService.updateReservation(bookingUpdationRequest);
     }
 
+    public void prepareReservationSummaryView(Model model, String reservationId) {
+        Reservation reservation = reservationService.getReservationById(Long.parseLong(reservationId));
+        model.addAttribute("reservation",reservation);
+    }
+
+    public void prepareHomeView(Authentication authentication, Model model) {
+        String userName = userService.findUserByEmail(authentication.getName()).getName();
+        model.addAttribute("userName",userName);
+    }
+
+    public void prepareMyReservationsView(Model model, Authentication authentication) {
+        User currentUser = userService.getCurrentLoggedInUser(authentication);
+        String userName = currentUser.getName();
+        List<Reservation> userReservations = currentUser.getReservations();
+        model.addAttribute("userReservations",userReservations);
+        model.addAttribute("userName",userName);
+    }
+
+    public void prepareReservationsUpdationView(String reservationId, Model model) {
+        Reservation reservation = reservationService.getReservationById(Long.parseLong(reservationId));
+        model.addAttribute("reservationId",reservation.getId());
+        model.addAttribute("reserverName",reservation.getReserverName());
+        model.addAttribute("phoneNumber",reservation.getReserverPhoneNumber());
+        model.addAttribute("pickUpAddress",reservation.getPickUpAddress());
+        model.addAttribute("dropOffAddress",reservation.getDropOffAddress());
+        model.addAttribute("startDate",reservation.getStartDateTime().toLocalDate());
+        model.addAttribute("endDate",reservation.getEndDateTime().toLocalDate());
+        model.addAttribute("startTime",reservation.getStartDateTime().toLocalTime());
+        model.addAttribute("endTime",reservation.getEndDateTime().toLocalTime());
+    }
 }
