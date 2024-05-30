@@ -23,14 +23,14 @@ spring:
       ddl-auto: update
 
   kafka:
-    bootstrap-servers: "192.168.1.4:9092"
+    bootstrap-servers: "10.40.94.150:9092"
     producer:
       keySerializer: "org.apache.kafka.common.serialization.StringSerializer"
       valueSerializer: "io.confluent.kafka.serializers.KafkaAvroSerializer"
       properties:
         schema:
           registry:
-            url: "http://192.168.1.4:8081"
+            url: "http://10.40.94.150:8081"
 
 logging:
   level:

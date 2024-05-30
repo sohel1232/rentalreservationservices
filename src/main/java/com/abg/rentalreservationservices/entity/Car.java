@@ -32,6 +32,8 @@ public class Car {
 
     private BigDecimal basePrice;
 
+    private String imageName;
+
     @OneToMany(mappedBy = "car")
     private  List<Reservation> reservations;
 

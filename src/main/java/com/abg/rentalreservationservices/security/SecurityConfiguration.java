@@ -79,7 +79,8 @@ public class SecurityConfiguration {
 
     private static final String[] WHITELIST = {
             "/register/**",
-            "/auth/**"
+            "/auth/**",
+            "/s3api/**"
     };
 
 }

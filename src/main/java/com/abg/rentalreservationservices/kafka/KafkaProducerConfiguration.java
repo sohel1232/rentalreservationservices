@@ -27,5 +27,4 @@ public class KafkaProducerConfiguration {
     @Value("${topic.name}")
     private String topicName;
 
-
 }

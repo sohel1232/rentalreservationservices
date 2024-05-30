@@ -83,10 +83,10 @@
         <button type="submit">Update Reservation</button>
     </form>
     <div id="error"></div>
-    <form id="reservation-cancellation-form" method="POST">
-        <input type="hidden" id="cancellablereservationId" name="reservationId" th:value="${reservationId}">
-        <button type="submit">Cancel Reservation</button>
-    </form>
+<!--    <form id="reservation-cancellation-form" method="POST">-->
+<!--        <input type="hidden" id="cancellablereservationId" name="reservationId" th:value="${reservationId}">-->
+<!--        <button type="submit">Cancel Reservation</button>-->
+<!--    </form>-->
 
 <script>
     const form = document.getElementById('reservation-updation-form');
@@ -131,37 +131,37 @@
         }
     });
 
-      document.getElementById('reservation-cancellation-form').addEventListener('submit', async (event) => {
-    event.preventDefault();
+<!--      document.getElementById('reservation-cancellation-form').addEventListener('submit', async (event) => {-->
+<!--    event.preventDefault();-->
 
-    const formData = new FormData(event.target);
-    const reservationId = formData.get('reservationId');
+<!--    const formData = new FormData(event.target);-->
+<!--    const reservationId = formData.get('reservationId');-->
 
-    try {
-        const baseUrl = 'http://localhost:8080';
-        const url = `${baseUrl}/api/cancel-reservation/${reservationId}`;
-        console.log("Cancelling reservation at: ", url);
+<!--    try {-->
+<!--        const baseUrl = 'http://localhost:8080';-->
+<!--        const url = `${baseUrl}/api/cancel-reservation/${reservationId}`;-->
+<!--        console.log("Cancelling reservation at: ", url);-->
 
-        const response = await fetch(url, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        if (!response.ok) {
-            const errorMessage = await response.json();
-            document.getElementById('error').innerText = errorMessage.message;
-            return;
-        } else {
-            const data = await response.json();
-            console.log('Reservation cancelled successfully:', data);
-            alert('Your booking has been cancelled.');
-            window.location.href = baseUrl;
-        }
-    } catch (error) {
-        console.error('There has been some error with cancellation', error);
-    }
-});
+<!--        const response = await fetch(url, {-->
+<!--            method: 'DELETE',-->
+<!--            headers: {-->
+<!--                'Content-Type': 'application/json'-->
+<!--            }-->
+<!--        });-->
+<!--        if (!response.ok) {-->
+<!--            const errorMessage = await response.json();-->
+<!--            document.getElementById('error').innerText = errorMessage.message;-->
+<!--            return;-->
+<!--        } else {-->
+<!--            const data = await response.json();-->
+<!--            console.log('Reservation cancelled successfully:', data);-->
+<!--            alert('Your booking has been cancelled.');-->
+<!--            window.location.href = baseUrl;-->
+<!--        }-->
+<!--    } catch (error) {-->
+<!--        console.error('There has been some error with cancellation', error);-->
+<!--    }-->
+<!--});-->
 </script>
 </body>
 </html>

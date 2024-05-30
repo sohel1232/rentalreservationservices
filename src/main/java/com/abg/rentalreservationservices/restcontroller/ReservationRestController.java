@@ -40,9 +40,9 @@ public class ReservationRestController {
         return requestHandlerService.updateReservation(bookingUpdationRequest);
     }
 
-    @DeleteMapping("/cancel-reservation/{reservationId}")
-    public ResponseEntity<ReservationCancellationSuccessResponse> cancelReservation(@PathVariable Long reservationId) throws Exception {
-        return requestHandlerService.cancelReservation(reservationId);
-    }
+//    @DeleteMapping("/cancel-reservation/{reservationId}")
+//    public ResponseEntity<ReservationCancellationSuccessResponse> cancelReservation(@PathVariable Long reservationId) throws Exception {
+//        return requestHandlerService.cancelReservation(reservationId);
+//    }
 
 }

@@ -39,6 +39,7 @@ public class ResponseManager {
             AvailableCarsResponse availableCarsResponse = AvailableCarsResponse.builder()
                     .id(car.getId())
                     .plate(car.getPlate())
+                    .carImage(car.getImageName())
                     .type(car.getType())
                     .name(car.getName())
                     .basePrice(car.getBasePrice())

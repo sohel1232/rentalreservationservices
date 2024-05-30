@@ -3,85 +3,97 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-        }
-        .form-container {
-            border: 1px solid #dee2e6;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            max-width: 600px;
-            width: 100%;
-        }
-        .form-container h1 {
-            text-align: center;
-            color: #007BFF;
-            margin-bottom: 20px;
-        }
-        .form-container form {
-            display: flex;
-            flex-direction: column;
-        }
-        .form-container label {
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .form-container input,
-        .form-container select,
-        .form-container button {
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .form-container button {
-            width: 100%;
-            color: #fff;
-            background-color: #007BFF;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .form-container button:hover {
-            background-color: #0056b3;
-        }
-        #available-cars {
-            margin-top: 10px;
-            }
-        #available-cars p {
-            margin-top: 0;
-            }
+       body {
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           height: 100vh;
+           margin: 0;
+           font-family: Arial, sans-serif;
+           background-color: #f8f9fa;
+       }
+       .form-container {
+           border: 1px solid #dee2e6;
+           padding: 20px;
+           border-radius: 8px;
+           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+           background-color: #fff;
+           max-width: 600px;
+           width: 100%;
+       }
+       .form-container h1 {
+           text-align: center;
+           color: #007BFF;
+           margin-bottom: 20px;
+       }
+       .form-container form {
+           display: flex;
+           flex-direction: column;
+       }
+       .form-container label {
+           margin-bottom: 5px;
+           font-weight: bold;
+       }
+       .form-container input,
+       .form-container select,
+       .form-container button {
+           margin-bottom: 15px;
+           padding: 10px;
+           border: 1px solid #dee2e6;
+           border-radius: 4px;
+           box-sizing: border-box;
+       }
+       .form-container button {
+           width: 100%;
+           color: #fff;
+           background-color: #007BFF;
+           border: none;
+           border-radius: 4px;
+           cursor: pointer;
+           transition: background-color 0.3s;
+       }
+       .form-container button:hover {
+           background-color: #0056b3;
+       }
+      .car-card {
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
+    width: calc(50% - 20px); /* Adjust width to occupy half of the available space */
+    margin-right: 20px; /* Add margin between the cards */
+    float: left; /* Float the cards to enable side-by-side layout */
+}
+
+@media (max-width: 768px) {
+    .car-card {
+        width: 100%; /* Change to full width on smaller screens */
+        margin-right: 0; /* Remove margin on smaller screens */
+        float: none; /* Clear float */
+    }
+}
+       .car-image {
+           max-width: 100%;
+           height: auto;
+           border-radius: 4px;
+           margin-bottom: 10px;
+       }
        .book-now-btn {
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 0.9em;
-        }
-        .book-now-btn:hover {
-            background-color: #218838;
-        }
-        #cars-count {
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 22px;
-            font-weight: bold;
-        }
-    </style>
-</head>
+           background-color: #28a745;
+           color: #fff;
+           border: none;
+           padding: 5px 10px;
+           border-radius: 4px;
+           cursor: pointer;
+           transition: background-color 0.3s;
+           font-size: 0.9em;
+       }
+       .book-now-btn:hover {
+           background-color: #218838;
+       }
+    </style></head>
 <body>
 
 <div class="form-container">
@@ -178,9 +190,14 @@
             if (availableCars && availableCars.length > 0) {
             carsCountDiv.innerHTML = `${availableCars.length} cars available`;
                 availableCars.forEach(car => {
+                    const imageUrl = `http://localhost:8080/s3api/view/${car.carImage}`;
+                    console.log("hi " + imageUrl );
                     const carDetails = `
-                        <p><b>${car.name}</b> - ${car.plate}  - ${car.type}
-                        <button class="book-now-btn" onclick="bookCar(${car.id})">Book Now</button></p>`;
+                    <div class="car-card">
+                        <img src="${imageUrl}" alt="${car.name}" class="car-image">
+                        <p><b>${car.name}</b> - ${car.plate} - ${car.type}  - ${car.basePrice}Rs
+                        <button class="book-now-btn" onclick="bookCar(${car.id})">Book Now</button></p>
+                    </div>`;
                     availableCarsDiv.innerHTML += carDetails;
                 });
             } else {

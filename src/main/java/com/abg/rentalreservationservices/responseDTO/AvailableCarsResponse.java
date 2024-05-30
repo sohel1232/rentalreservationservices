@@ -19,4 +19,6 @@ public class AvailableCarsResponse {
     private Integer seatingCapacity;
 
     private BigDecimal basePrice;
+
+    private String carImage;
 }
