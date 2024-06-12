@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.abg</groupId>
 	<artifactId>rentalreservationservices</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>rentalreservationservices</name>
 	<description>Car rental reservation for Kafka producer side</description>
 	<properties>

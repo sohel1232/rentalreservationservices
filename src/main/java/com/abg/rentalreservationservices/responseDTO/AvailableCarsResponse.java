@@ -20,5 +20,5 @@ public class AvailableCarsResponse {
 
     private BigDecimal basePrice;
 
-    private String carImage;
+   // private String carImage;
 }

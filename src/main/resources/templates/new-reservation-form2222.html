@@ -190,8 +190,11 @@
             if (availableCars && availableCars.length > 0) {
             carsCountDiv.innerHTML = `${availableCars.length} cars available`;
                 availableCars.forEach(car => {
+<!--                    const imageUrl = `http://localhost:8080/s3api/view/${car.carImage}`;-->
+<!--                    console.log("hi " + imageUrl );-->
                     const carDetails = `
                     <div class="car-card">
+<!--                        <img src="${imageUrl}" alt="${car.name}" class="car-image">-->
                         <p><b>${car.name}</b> - ${car.plate} - ${car.type}  - ${car.basePrice}Rs
                         <button class="book-now-btn" onclick="bookCar(${car.id})">Book Now</button></p>
                     </div>`;

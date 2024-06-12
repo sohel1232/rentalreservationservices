@@ -42,6 +42,8 @@ public class ReservationManager implements ReservationService {
         User currentLoggedInUser = userService.getCurrentLoggedInUser(authentication);
 
         BigDecimal amountRecieved = car.getBasePrice();
+        BigDecimal multiplier = new BigDecimal("1.5");
+        BigDecimal totalAmountRecieved = amountRecieved.multiply(multiplier);
 
         Reservation reservation = new Reservation();
         reservation.setSourceCity(servicableCityService.getServicableCityByName(reservationRequest.getSourceCity()));
@@ -55,7 +57,7 @@ public class ReservationManager implements ReservationService {
         reservation.setSeatingCapacity(reservationRequest.getSeatingCapacity());
         reservation.setStartDateTime(reservationRequest.getStartDateTime());
         reservation.setEndDateTime(reservationRequest.getEndDateTime());
-        reservation.setAmountRecieved(amountRecieved);
+        reservation.setAmountRecieved(totalAmountRecieved);
 
         if(reservationRequest.getReserverName()!=null && !reservationRequest.getReserverName().isEmpty()){
             reservation.setReserverName(reservation.getReserverName());
